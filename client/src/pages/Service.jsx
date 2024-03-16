@@ -12,7 +12,7 @@ const Service = () => {
                 </div>
                 <div className="d-flex flex-wrap justify-content-center">
                     {ingred.map((curr) => {
-                        return <Ingredients key={curr._id} name={curr.name} description={curr.description} price={curr.price} />
+                        return <Ingredients key={curr._id} name={curr.name} description={curr.description} price={curr.price} items={curr.items} optional={curr.optional} />
                     })}
                 </div>
             </> : <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Please Login before using Our Services</h1>}

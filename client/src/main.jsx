@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <>
+  <StrictMode>
     <AuthProvider>
       <BrowserRouter>
         <App />
@@ -27,5 +27,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         transition:Bounce
       />
     </AuthProvider>
-  </>,
+  </StrictMode>,
 )

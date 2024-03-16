@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [userData, setData] = useState({});
     const [ingred, setIngred] = useState([]);
-    const [options, setOptions] = useState([]);
+    const [options, setOptions] = useState({});
+    const [radioOpt, setOpt] = useState({});
     //function to stored the token in local storage
     const storeTokenInLS = (serverToken) => {
         setToken(serverToken);
@@ -34,13 +35,23 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const getOptions = (value, checked) => {
+    const getOptions = (name, value, checked) => {
+        let getItems = options[name] || [];
         if (checked) {
-            setOptions([...options, value]);
+            setOptions({ ...options, [name]: [...getItems, value] });
         } else {
-            setOptions(options.filter((item) => item !== value));
+            console.log(options[name]);
+            let itemOpt = getItems.filter((item) => item !== value)
+            setOptions({ ...options, [name]: [...itemOpt] });
         }
 
+    };
+
+    const radioChange = (name, value) => {
+        setOpt({
+            ...radioOpt,
+            [name]: value,
+        })
     };
 
     const getUserInfo = async () => {
@@ -63,8 +74,9 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+
     return (
-        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options }}>
+        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt }}>
             {children}
         </AuthContext.Provider>
     );
