@@ -20,4 +20,6 @@ router.route('/verification/mail').post(controller.sendmail);
 
 router.route('/verification/otp').post(controller.varifyMail);
 
+router.route('/cart').post(controller.addToCart);
+
 module.exports = router;

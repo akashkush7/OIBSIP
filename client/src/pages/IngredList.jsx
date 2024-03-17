@@ -12,6 +12,7 @@ const IngredList = ({ name, description, price, items, optional }) => {
                     <p className="card-text">{description}</p>
                 </div>
                 <h6 className="fw-bold mx-3">Price: {price} Rs./Item</h6><br />
+                <h6 className="fw-bold mx-3">*required</h6><br />
                 <div className="d-flex flex-column mx-3 mb-2">
                     {items.map((curr, index) => {
                         return <Options key={index} item={curr} optional={optional} name={name} />

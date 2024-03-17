@@ -45,13 +45,9 @@ const userSchema = Schema({
     },
     orders: [
         {
-            orderId: {
-                type: String,
-                required: true,
-            },
             ingredients: {
-                type: String,
-                default: "",
+                type: Array,
+                default: [],
             },
             date: {
                 type: Date,
@@ -60,6 +56,14 @@ const userSchema = Schema({
             status: {
                 type: String,
                 default: "Ordered",
+            },
+        },
+    ],
+    cart: [
+        {
+            ingredients: {
+                type: Object,
+                require: true,
             },
         },
     ]

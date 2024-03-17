@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -10,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     const [ingred, setIngred] = useState([]);
     const [options, setOptions] = useState({});
     const [radioOpt, setOpt] = useState({});
+    const [cart, setCart] = useState([]);
     //function to stored the token in local storage
     const storeTokenInLS = (serverToken) => {
         setToken(serverToken);
@@ -54,6 +54,20 @@ export const AuthProvider = ({ children }) => {
         })
     };
 
+    const setOrder = () => {
+        console.log(radioOpt);
+        const order = {
+            ingredients: { ...radioOpt, ...options },
+        }
+        return order;
+    }
+
+    const addToCart = () => {
+        const addItem = setOrder();
+        setCart([...cart, addItem]);
+        return addItem["ingredients"];
+    }
+
     const getUserInfo = async () => {
         if (isLoggedIn) {
             try {
@@ -76,7 +90,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt }}>
+        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token }}>
             {children}
         </AuthContext.Provider>
     );

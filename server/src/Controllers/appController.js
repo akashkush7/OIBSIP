@@ -185,4 +185,24 @@ const varifyMail = async (req, res) => {
     }
 };
 
-module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail };
+const addToCart = async (req, res) => {
+    try {
+        const { token, ingredients } = req.body;
+        const result = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+        if (result) {
+            const { userId } = result;
+            console.log(ingredients);
+            const response = await User.updateOne({ _id: userId }, { $push: { cart: { ingredients } } });
+            if (response) {
+                console.log(response);
+                res.status(200).json({ msg: "Added to Cart" });
+            } else {
+                res.status(500).json({ msg: "Item not added to the Cart" });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart };

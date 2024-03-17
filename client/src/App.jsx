@@ -11,6 +11,7 @@ import Admin from './pages/Admin'
 import { Routes, Route } from 'react-router-dom'
 import { useAuth } from './store/auth'
 import Footer from './pages/Footer'
+import Cart from './pages/Cart'
 
 export const App = () => {
   const { getUserInfo, isLoggedIn } = useAuth();
@@ -33,6 +34,7 @@ export const App = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </>
