@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '../store/auth';
 
 const Options = ({ item, optional, name }) => {
-    const { getOptions, isLoggedIn, radioChange } = useAuth();
+    const { getOptions, isLoggedIn, radioChange, reset } = useAuth();
     const checkChange = (event) => {
         const { name, value, checked } = event.target;
         getOptions(name, value, checked);
@@ -11,9 +11,12 @@ const Options = ({ item, optional, name }) => {
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        const checked = event.target.checked;
-        radioChange(name, value, checked);
+        radioChange(name, value);
     }
+
+    useEffect(() => {
+        reset();
+    }, []);
 
     return (
         <>

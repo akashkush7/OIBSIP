@@ -65,6 +65,10 @@ const userSchema = Schema({
                 type: Object,
                 require: true,
             },
+            price: {
+                type: Number,
+                require: true,
+            },
         },
     ]
 });

@@ -10,6 +10,8 @@ export const AuthProvider = ({ children }) => {
     const [options, setOptions] = useState({});
     const [radioOpt, setOpt] = useState({});
     const [cart, setCart] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [prices, setPrices] = useState({});
     //function to stored the token in local storage
     const storeTokenInLS = (serverToken) => {
         setToken(serverToken);
@@ -24,23 +26,38 @@ export const AuthProvider = ({ children }) => {
         return localStorage.removeItem('token');
     }
 
+    const fixPrices = (resjson) => {
+        resjson.forEach((item) => {
+            let { name, price } = item;
+            let appendPrice = { [name]: price };
+            setPrices(prices => ({
+                ...prices,
+                ...appendPrice,
+            }));
+        })
+    }
+
     const getIngred = async () => {
         try {
             const response = await fetch('http://localhost:8000/ingredient');
             const resjson = await response.json();
-            console.log(resjson);
             setIngred(resjson);
+            fixPrices(resjson);
         } catch (error) {
             console.log(error);
         }
     }
+
+    const reset = (() => {
+        setOpt({});
+        setOptions({});
+    })
 
     const getOptions = (name, value, checked) => {
         let getItems = options[name] || [];
         if (checked) {
             setOptions({ ...options, [name]: [...getItems, value] });
         } else {
-            console.log(options[name]);
             let itemOpt = getItems.filter((item) => item !== value)
             setOptions({ ...options, [name]: [...itemOpt] });
         }
@@ -51,11 +68,10 @@ export const AuthProvider = ({ children }) => {
         setOpt({
             ...radioOpt,
             [name]: value,
-        })
+        });
     };
 
     const setOrder = () => {
-        console.log(radioOpt);
         const order = {
             ingredients: { ...radioOpt, ...options },
         }
@@ -80,7 +96,6 @@ export const AuthProvider = ({ children }) => {
                 });
                 const res = await result.json();
                 setData(res);
-                console.log(res);
                 getIngred();
             } catch (error) {
                 console.log(error);
@@ -90,7 +105,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token }}>
+        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token, total, prices, setOrder, setTotal, reset }}>
             {children}
         </AuthContext.Provider>
     );

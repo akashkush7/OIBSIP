@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItems from './CartItems';
 import { useAuth } from '../store/auth';
 
 const Cart = () => {
     const { userData, isLoggedIn } = useAuth();
     const cartItems = userData['cart'] || [];
+
     return (
         <>{isLoggedIn ?
             <>

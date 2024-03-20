@@ -187,12 +187,12 @@ const varifyMail = async (req, res) => {
 
 const addToCart = async (req, res) => {
     try {
-        const { token, ingredients } = req.body;
+        const { token, ingredients, price } = req.body;
         const result = await jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (result) {
             const { userId } = result;
-            console.log(ingredients);
-            const response = await User.updateOne({ _id: userId }, { $push: { cart: { ingredients } } });
+            console.log(ingredients, price);
+            const response = await User.updateOne({ _id: userId }, { $push: { cart: { ingredients, price } } });
             if (response) {
                 console.log(response);
                 res.status(200).json({ msg: "Added to Cart" });

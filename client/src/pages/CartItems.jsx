@@ -4,7 +4,6 @@ const CartItems = ({ item }) => {
     let ingredients = item['ingredients'];
     const entries = Object.entries(ingredients)
 
-    console.log(Object.values(entries));
     return (
         <div className="card mx-5 my-4" style={{ color: "white", backgroundColor: "#F98866" }}>
             <img src="src/Images/Slide1.jpg" className="card-img-top" alt="Cart-Item" style={{ objectFit: "cover", height: "300px" }} />
@@ -23,10 +22,14 @@ const CartItems = ({ item }) => {
                                 return (
                                     <tr key={index}>
                                         <th scope="row">{curr[0]}</th>
-                                        <td>{curr[1]}</td>
+                                        <td>{curr[1].toString()}</td>
                                     </tr>
                                 )
                             })}
+                            <tr className='table-info'>
+                                <th scope="row">Grand Total</th>
+                                <td>{item["price"]} Rs.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
