@@ -12,6 +12,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useAuth } from './store/auth'
 import Footer from './pages/Footer'
 import Cart from './pages/Cart'
+import Summary from './pages/Summary'
 
 export const App = () => {
   const { getUserInfo, isLoggedIn } = useAuth();
@@ -35,6 +36,7 @@ export const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/ordersummary" element={<Summary />} />
       </Routes>
       <Footer />
     </>

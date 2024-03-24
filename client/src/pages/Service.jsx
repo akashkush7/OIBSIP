@@ -58,7 +58,7 @@ const Service = () => {
     const submitChange = (e) => {
         e.preventDefault();
         if (checkItems()) {
-            console.log(true);
+            navigate("/ordersummary");
         }
     }
 
