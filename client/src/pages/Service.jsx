@@ -8,28 +8,36 @@ const Service = () => {
     const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOpt, setOptions } = useAuth();
     const navigate = useNavigate();
 
-    const itemToCart = async () => {
+    const checkItems = () => {
         if (Object.keys(radioOpt).length < 3) {
             toast.error("Please select the required Items");
-            return;
+            return false;
+        } else {
+            return true;
         }
-        const addItem = addToCart();
-        try {
-            const result = await fetch('http://localhost:8000/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token, ingredients: addItem, price: total }),
-            })
-            const res = await result.json();
-            if (result.ok) {
-                toast.success(res.msg);
-            } else {
-                toast.error(res.msg);
+    }
+
+    const itemToCart = async () => {
+        if (checkItems()) {
+
+            const addItem = addToCart();
+            try {
+                const result = await fetch('http://localhost:8000/cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token, ingredients: addItem, price: total }),
+                })
+                const res = await result.json();
+                if (result.ok) {
+                    toast.success(res.msg);
+                } else {
+                    toast.error(res.msg);
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
     }
 
@@ -46,6 +54,13 @@ const Service = () => {
         });
         setTotal(temp);
     };
+
+    const submitChange = (e) => {
+        e.preventDefault();
+        if (checkItems()) {
+            console.log(true);
+        }
+    }
 
     useEffect(() => {
         updateTotal();
@@ -78,7 +93,7 @@ const Service = () => {
                 <div className='col-11 d-flex justify-content-end'>
                     <h3>Total : {total}</h3>
                     <button type="button" className='btn btn-outline-dark btn-lg fw-bold mx-3' onClick={itemToCart}>Add to Cart</button>
-                    <button type="submit" className='btn btn-outline-dark btn-lg fw-bold'>Buy Now</button>
+                    <button type="submit" className='btn btn-outline-dark btn-lg fw-bold' onClick={submitChange}>Buy Now</button>
                 </div>
             </> : <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Please Login before using Our Services</h1>}
         </>

@@ -4,7 +4,7 @@ const Footer = () => {
     const date = new Date().getUTCFullYear();
     return (
         <footer>
-            <h5 className="text-center text-black-50">Copyright : {date}</h5>
+            <h5 className="text-center text-black-50">Copyright{date}@All Rights Reserved</h5>
         </footer>
     )
 }

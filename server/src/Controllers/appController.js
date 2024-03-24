@@ -205,4 +205,18 @@ const addToCart = async (req, res) => {
     }
 }
 
-module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart };
+const deleteFromCart = async (req, res) => {
+    try {
+        const { _id, email } = req.body;
+        const response = await User.updateOne({ email }, { $pull: { "cart": { _id } } });
+        if (response) {
+            res.status(200).json({ msg: "Deleted Item from Cart" });
+        } else {
+            res.status(500).json({ msg: "Failed to Delete" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart };

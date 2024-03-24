@@ -80,7 +80,6 @@ export const AuthProvider = ({ children }) => {
 
     const addToCart = () => {
         const addItem = setOrder();
-        setCart([...cart, addItem]);
         return addItem["ingredients"];
     }
 
@@ -96,6 +95,7 @@ export const AuthProvider = ({ children }) => {
                 });
                 const res = await result.json();
                 setData(res);
+                setCart(res['cart']);
                 getIngred();
             } catch (error) {
                 console.log(error);
@@ -103,9 +103,15 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const deleteToCart = (id) => {
+        setCart(cart.filter((item) => {
+            console.log(item);
+            return item['_id'] !== id;
+        }))
+    }
 
     return (
-        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token, total, prices, setOrder, setTotal, reset }}>
+        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token, total, prices, setOrder, setTotal, reset, cart }}>
             {children}
         </AuthContext.Provider>
     );

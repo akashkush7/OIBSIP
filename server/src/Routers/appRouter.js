@@ -22,4 +22,6 @@ router.route('/verification/otp').post(controller.varifyMail);
 
 router.route('/cart').post(controller.addToCart);
 
+router.route('/cart').patch(controller.deleteFromCart);
+
 module.exports = router;
