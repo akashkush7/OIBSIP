@@ -22,10 +22,14 @@ router.route('/verification/otp').post(controller.varifyMail);
 
 router.route('/cart').post(controller.addToCart);
 
-router.route('/paymentCapture').patch(controller.paymentCapture);
+router.route('/cart').patch(controller.deleteFromCart);
+
+router.route('/payment').post(controller.paymentCapture);
 
 router.route('/order').post(controller.createPayment);
 
 router.route('/refund').post(controller.refund);
+
+router.route('/makeOrder').post(controller.makeOrder);
 
 module.exports = router;

@@ -12,6 +12,9 @@ export const AuthProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0);
     const [prices, setPrices] = useState({});
+    const [orderList, setOrderList] = useState([]);
+    const [displayRazorpay, setDisplayRazorpay] = useState(false);
+    const [address, setAddress] = useState("");
     //function to stored the token in local storage
     const storeTokenInLS = (serverToken) => {
         setToken(serverToken);
@@ -103,15 +106,35 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const deleteToCart = (id) => {
-        setCart(cart.filter((item) => {
-            console.log(item);
-            return item['_id'] !== id;
-        }))
-    }
-
     return (
-        <AuthContext.Provider value={{ storeTokenInLS, isLoggedIn, LogoutUser, getUserInfo, userData, isAdmin, ingred, getOptions, options, radioChange, radioOpt, addToCart, token, total, prices, setOrder, setTotal, reset, cart }}>
+        <AuthContext.Provider value={{
+            storeTokenInLS,
+            isLoggedIn,
+            LogoutUser,
+            getUserInfo,
+            userData,
+            isAdmin,
+            ingred,
+            getOptions,
+            options,
+            radioChange,
+            radioOpt,
+            addToCart,
+            token,
+            total,
+            prices,
+            setOrder,
+            setTotal,
+            reset,
+            cart,
+            orderList,
+            setOrderList,
+            displayRazorpay,
+            setDisplayRazorpay,
+            setCart,
+            address,
+            setAddress
+        }}>
             {children}
         </AuthContext.Provider>
     );

@@ -45,18 +45,34 @@ const userSchema = Schema({
     },
     orders: [
         {
-            ingredients: {
+            order: {
                 type: Array,
                 default: [],
+            },
+            price: {
+                type: Number,
+                require: true,
+            },
+            address: {
+                type: String,
+                require: true,
             },
             date: {
                 type: Date,
                 default: Date.now(),
             },
-            status: {
+            orderStatus: {
                 type: String,
                 default: "Ordered",
             },
+            paymentStatus: {
+                type: String,
+                require: true,
+            },
+            orderId: {
+                type: String,
+                require: true,
+            }
         },
     ],
     cart: [

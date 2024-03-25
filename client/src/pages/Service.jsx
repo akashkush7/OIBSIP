@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const Service = () => {
-    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOpt, setOptions } = useAuth();
+    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList } = useAuth();
     const navigate = useNavigate();
 
     const checkItems = () => {
@@ -58,6 +58,7 @@ const Service = () => {
     const submitChange = (e) => {
         e.preventDefault();
         if (checkItems()) {
+            setOrderList([setOrder()]);
             navigate("/ordersummary");
         }
     }
@@ -91,7 +92,7 @@ const Service = () => {
                     })}
                 </div>
                 <div className='col-11 d-flex justify-content-end'>
-                    <h3>Total : {total}</h3>
+                    <h3 className='m-2 font-heading'>Total : {total} Rs.</h3>
                     <button type="button" className='btn btn-outline-dark btn-lg fw-bold mx-3' onClick={itemToCart}>Add to Cart</button>
                     <button type="submit" className='btn btn-outline-dark btn-lg fw-bold' onClick={submitChange}>Buy Now</button>
                 </div>

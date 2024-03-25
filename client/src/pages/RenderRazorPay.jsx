@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import crypto from 'crypto-js';
-import PropTypes from 'prop-types';
 import Axios from 'axios';
+import { useAuth } from '../store/auth';
 import { toast } from "react-toastify"
 
 // Function to load script and append in DOM tree.
@@ -27,6 +27,7 @@ const RenderRazorpay = ({
 }) => {
     const paymentId = useRef(null);
     const paymentMethod = useRef(null);
+    const { orderList, userData, total, address, setDisplayRazorpay } = useAuth();
 
     // To load razorpay checkout modal script.
     const displayRazorpay = async (options) => {
@@ -63,6 +64,21 @@ const RenderRazorpay = ({
                 status,
                 orderDetails,
             });
+        if (status === "succeeded") {
+            const resOrder = await fetch("http://localhost:8000/makeOrder", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ order: orderList, email: userData["email"], price: total, address, paymentStatus: status, orderId: orderDetails["orderId"] })
+            });
+            const resData = await resOrder.json();
+            if (resOrder.ok) {
+                toast.success(resData.msg);
+            } else {
+                toast.error(resData.msg);
+            }
+        }
     };
 
 
@@ -75,7 +91,6 @@ const RenderRazorpay = ({
         order_id: orderId, // order id from props
         // This handler menthod is always executed in case of succeeded payment
         handler: (response) => {
-            toast.success('succeeded');
             console.log(response);
             paymentId.current = response.razorpay_payment_id;
 
@@ -89,12 +104,16 @@ const RenderRazorpay = ({
                     paymentId,
                     signature: response.razorpay_signature,
                 });
+                toast.success('Payment Done');
+
             } else {
                 handlePayment('failed', {
                     orderId,
                     paymentId: response.razorpay_payment_id,
                 });
+                toast.error("Payment Failed");
             }
+            setDisplayRazorpay(false);
         },
         modal: {
             confirm_close: true, // this is set to true, if we want confirmation when clicked on cross button.

@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const validator = require("validator");
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+const { response } = require('express');
 const secret_key = '1234567890';
 
 const register = async (req, res) => {
@@ -231,7 +232,7 @@ const createPayment = async (req, res) => {
     const options = {
         amount: req.body.amount,
         currency: req.body.currency,
-        receipt: "any unique id for every order",
+        receipt: "",
         payment_capture: 1
     };
     try {
@@ -247,13 +248,16 @@ const createPayment = async (req, res) => {
 }
 
 const paymentCapture = (req, res) => {
-    const data = crypto.createHmac('sha256', secret_key)
+    const { orderDetails } = req.body;
+    const data = crypto.createHmac('sha256', "zuprjSXKrG1ybXqzzBocOnre");
 
-    data.update(JSON.stringify(req.body))
+    console.log(orderDetails);
+
+    data.update(`${orderDetails["orderId"]}|${orderDetails.paymentId['current']}`)
 
     const digest = data.digest('hex')
 
-    if (digest === req.headers['x-razorpay-signature']) {
+    if (digest === orderDetails["signature"]) {
 
         console.log('request is legit')
 
@@ -266,7 +270,6 @@ const paymentCapture = (req, res) => {
         })
 
     } else {
-
         res.status(400).send('Invalid signature');
 
     }
@@ -301,4 +304,21 @@ const refund = async (req, res) => {
     }
 }
 
-module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment };
+const makeOrder = async (req, res) => {
+    try {
+        const { order, email, price, address, orderId, paymentStatus } = req.body;
+        const result = await User.updateOne({ email }, { $push: { orders: { order, price, address, orderId, paymentStatus } } });
+        if (order.length > 1) {
+            await User.updateOne({ email }, { $set: { cart: [] } })
+        }
+        if (result) {
+            res.status(200).json({ msg: "Ordered Successfully" });
+        } else {
+            res.status(500).json({ msg: "Order Failed" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment, makeOrder };
