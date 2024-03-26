@@ -33,7 +33,7 @@ const CartItems = ({ item }) => {
 
     return (
         <div className="card my-4" style={{ color: "white", backgroundColor: "#F98866" }}>
-            <img src={Img["Slide1.jpg"]} className="card-img-top" alt="Cart-Item" style={{ objectFit: "cover", height: "300px" }} />
+            <img src={Img["Slide1"]} className="card-img-top" alt="Cart-Item" style={{ objectFit: "cover", height: "300px" }} />
             <div className="card-body">
                 <h4 className="card-title">Custom Pizza</h4>
                 <div className='d-flex justify-content-center mt-3'>
