@@ -1,8 +1,5 @@
 import Cards from "./Cards";
-import Slide1 from "../Images/Slide1.jpg"
-import Slide2 from "../Images/Slide2.jpg"
-import Slide3 from "../Images/Slide3.jpg"
-import PizzaMain from "../Images/PizzaMain.png"
+import Img from './Images';
 
 const Home = () => {
     const homeData = [
@@ -29,21 +26,21 @@ const Home = () => {
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active" data-bs-interval="5000">
-                        <img src={Slide1} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
+                        <img src={Img["Slide1"]} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
                         <div className="carousel-caption d-none d-md-block">
                             <h5>{homeData[0].heading}</h5>
                             <p>{homeData[0].para}</p>
                         </div>
                     </div>
                     <div className="carousel-item" data-bs-interval="5000">
-                        <img src={Slide2} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
+                        <img src={Img["Slide2"]} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
                         <div className="carousel-caption d-none d-md-block">
                             <h5>{homeData[1].heading}</h5>
                             <p>{homeData[1].para}</p>
                         </div>
                     </div>
                     <div className="carousel-item" data-bs-interval="5000">
-                        <img src={Slide3} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
+                        <img src={Img["Slide3"]} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
                         <div className="carousel-caption d-none d-md-block">
                             <h5>{homeData[2].heading}</h5>
                             <p>{homeData[2].para}</p>
@@ -72,7 +69,7 @@ const Home = () => {
                                     </h2>
                                 </div>
                                 <div className="col-lg-6 mt-md-5 mt-lg-5 order-1 order-lg-2 header-img">
-                                    <img className="img-fluid" src={PizzaMain} alt="" />
+                                    <img className="img-fluid" src={Img["PizzaMain"]} alt="" />
                                 </div>
                             </div>
                         </div>
