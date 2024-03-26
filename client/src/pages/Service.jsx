@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import OrderDetails from './OrderDetails';
 
+
 const Service = () => {
     const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders } = useAuth();
     const navigate = useNavigate();

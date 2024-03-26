@@ -17,6 +17,7 @@ import Summary from './pages/Summary'
 export const App = () => {
   const { getUserInfo, isLoggedIn } = useAuth();
   let ignore = false;
+
   useEffect(() => {
     if (!ignore) {
       getUserInfo();
