@@ -9,7 +9,7 @@ const errorMiddleware = require("./middlewares/error_middleware");
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-    origin: "https://oibsip-client.onrender.com",
+    origin: ["https://oibsip-client.onrender.com", "http://localhost:5173"],
     methods: "GET, POST, PATCH, DELETE, HEAD",
     credentials: true,
 };

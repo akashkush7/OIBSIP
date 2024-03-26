@@ -31,7 +31,7 @@ const Service = () => {
 
             const addItem = addToCart();
             try {
-                const result = await fetch('https://oibsip-3.onrender.com/cart', {
+                const result = await fetch(`${import.meta.env.VITE_BASE_URL}/cart`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -102,31 +102,31 @@ const Service = () => {
                     })}
                 </div>
                 <div className='col-11 d-flex justify-content-end'>
-                    <h3 className='m-2 font-heading'>Total : {total} Rs.</h3>
-                    <button type="button" className='btn btn-outline-dark btn-lg fw-bold mx-3' onClick={itemToCart}>Add to Cart</button>
-                    <button type="submit" className='btn btn-outline-dark btn-lg fw-bold' onClick={submitChange}>Buy Now</button>
+                    <h3 className='m-2 font-heading size-font'>Total : {total} Rs.</h3>
+                    <button type="button" className='btn btn-outline-dark btn-lg mx-3 size-font' onClick={itemToCart}>Add to Cart</button>
+                    <button type="submit" className='btn btn-outline-dark btn-lg size-font' onClick={submitChange}>Buy Now</button>
                 </div>
                 <div className='mt-5'>
                     <h1 className='font-heading text-center'>Order History</h1>
                     <div className='d-flex justify-content-center'>
                         <div className='d-flex justify-content-center mt-3 col-10'>
-                            <table className='table text-center'>
+                            <table className='table text-center' style={{ fontSize: "1.5vw" }}>
                                 <thead className='table-dark'>
                                     <tr>
                                         <th scope="col">Order Id</th>
-                                        <th scope="col">Details</th>
                                         <th scope="col">Order Date</th>
                                         <th scope="col">Payment Status</th>
+                                        <th scope="col">Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {orders.map((curr, index) => {
                                         return (
                                             <tr key={index}>
-                                                <th scope="row" className='fs-5'>{curr.orderId}</th>
-                                                <td><button className='btn btn-outline-dark' onClick={() => togglePop(curr.orderId)}>View Order Details</button></td>
+                                                <th scope="row">{curr.orderId}</th>
                                                 <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
                                                 <td style={{ color: "green", fontWeight: "bold" }}>{curr.paymentStatus}</td>
+                                                <td><button className='btn btn-outline-dark' style={{ fontSize: "1.5vw" }} onClick={() => togglePop(curr.orderId)}>View Details</button></td>
                                             </tr>
                                         );
                                     })}

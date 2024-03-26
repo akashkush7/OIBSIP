@@ -11,7 +11,7 @@ const OrderDetails = ({ toggle, id }) => {
         if (id !== null) {
             console.log(id);
             try {
-                const result = await fetch("https://oibsip-3.onrender.com/orderdetails", {
+                const result = await fetch(`${import.meta.env.VITE_BASE_URL}/orderdetails`, {
                     method: 'POST',
                     headers: {
                         "Content-type": "application/json",
@@ -39,7 +39,7 @@ const OrderDetails = ({ toggle, id }) => {
             <>
                 <div className='popup'>
                     <div className='popup-inner'>
-                        <h2>Order Details</h2>
+                        <h2 className='text-center fw-bold'>Order Details</h2>
                         <table className='table text-center'>
                             <tbody>
                                 <tr>
@@ -68,7 +68,9 @@ const OrderDetails = ({ toggle, id }) => {
                                 </tr>
                             </tbody>
                         </table>
-                        <button className="btn btn-outline-dark" onClick={toggle}>Close</button>
+                        <div className='text-center'>
+                            <button className="btn btn-outline-dark" onClick={toggle}>Close</button>
+                        </div>
                     </div>
                 </div></> : <></>}
         </>

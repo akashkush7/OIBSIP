@@ -24,7 +24,7 @@ const Login = () => {
     const submitData = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('https://oibsip-3.onrender.com/login', {
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

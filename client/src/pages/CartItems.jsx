@@ -12,7 +12,7 @@ const CartItems = ({ item }) => {
 
     const deleteChange = async () => {
         try {
-            const result = await fetch('https://oibsip-3.onrender.com/cart', {
+            const result = await fetch(`${import.meta.env.VITE_BASE_URL}/cart`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

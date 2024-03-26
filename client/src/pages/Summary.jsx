@@ -28,7 +28,7 @@ const Summary = () => {
                 return;
             }
 
-            const result = await fetch("https://oibsip-3.onrender.com/order", {
+            const result = await fetch(`${import.meta.env.VITE_BASE_URL}/order`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

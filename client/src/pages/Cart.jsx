@@ -11,7 +11,7 @@ const Cart = () => {
         e.preventDefault();
         if (total > 0) {
             setOrderList(cart);
-            navigate("/ordersummary")
+            navigate(`${import.meta.env.BASE_URL}/ordersummary`);
         }
     }
 
