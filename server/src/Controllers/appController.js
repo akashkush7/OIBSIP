@@ -1,11 +1,9 @@
-const [User, Ingredient, Otp] = require('../Models/appModel');
+const [User, Ingredient, Otp, Admin] = require('../Models/appModel');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const validator = require("validator");
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
-const { response } = require('express');
-const secret_key = '1234567890';
 
 const register = async (req, res) => {
     try {
@@ -307,11 +305,12 @@ const refund = async (req, res) => {
 const makeOrder = async (req, res) => {
     try {
         const { order, email, price, address, orderId, paymentStatus } = req.body;
-        const result = await User.updateOne({ email }, { $push: { orders: { order, price, address, orderId, paymentStatus } } });
-        if (order.length > 1) {
+        const resultUser = await User.updateOne({ email }, { $push: { orders: { orderId, paymentStatus } } });
+        const resultAdmin = await Admin.create({ order, price, address, orderId, paymentStatus });
+        if (order[0]['_id']) {
             await User.updateOne({ email }, { $set: { cart: [] } })
         }
-        if (result) {
+        if (resultUser && resultAdmin) {
             res.status(200).json({ msg: "Ordered Successfully" });
         } else {
             res.status(500).json({ msg: "Order Failed" });

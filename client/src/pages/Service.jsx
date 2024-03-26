@@ -2,11 +2,17 @@ import Ingredients from './IngredList'
 import { useAuth } from '../store/auth'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import OrderDetails from './OrderDetails';
 
 const Service = () => {
-    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList } = useAuth();
+    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders } = useAuth();
     const navigate = useNavigate();
+    const [seen, setSeen] = useState(false);
+
+    function togglePop() {
+        setSeen(!seen);
+    };
 
     const checkItems = () => {
         if (Object.keys(radioOpt).length < 3) {
@@ -63,6 +69,7 @@ const Service = () => {
         }
     }
 
+
     useEffect(() => {
         updateTotal();
     }, [radioOpt, options])
@@ -95,6 +102,38 @@ const Service = () => {
                     <h3 className='m-2 font-heading'>Total : {total} Rs.</h3>
                     <button type="button" className='btn btn-outline-dark btn-lg fw-bold mx-3' onClick={itemToCart}>Add to Cart</button>
                     <button type="submit" className='btn btn-outline-dark btn-lg fw-bold' onClick={submitChange}>Buy Now</button>
+                </div>
+                <div className='mt-5'>
+                    <h1 className='font-heading text-center'>Order History</h1>
+                    <div className='d-flex justify-content-center'>
+                        <div className='d-flex justify-content-center mt-3 col-10'>
+                            <table className='table text-center'>
+                                <thead className='table-dark'>
+                                    <tr>
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Details</th>
+                                        <th scope="col">Order Date</th>
+                                        <th scope="col">Payment Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {orders.map((curr, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <th scope="row" className='fs-5'>{curr.orderId}</th>
+                                                <td><button className='btn btn-outline-dark' onClick={togglePop}>View Order Details</button>
+                                                    {seen ? <OrderDetails toggle={togglePop} id={curr.orderId} /> : null}</td>
+                                                <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
+                                                <td style={{ color: "green", fontWeight: "bold" }}>{curr.paymentStatus}</td>
+                                            </tr>
+                                        );
+                                    })}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </> : <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Please Login before using Our Services</h1>}
         </>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useAuth } from '../store/auth';
 
 const Options = ({ item, optional, name }) => {
-    const { getOptions, isLoggedIn, radioChange, reset } = useAuth();
+    const { getOptions, isLoggedIn, radioChange, reset, getUserInfo } = useAuth();
     const checkChange = (event) => {
         const { name, value, checked } = event.target;
         getOptions(name, value, checked);
@@ -16,6 +16,7 @@ const Options = ({ item, optional, name }) => {
 
     useEffect(() => {
         reset();
+        getUserInfo();
     }, []);
 
     return (

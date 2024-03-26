@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [orderList, setOrderList] = useState([]);
     const [displayRazorpay, setDisplayRazorpay] = useState(false);
     const [address, setAddress] = useState("");
+    const [orders, setOrders] = useState([]);
     //function to stored the token in local storage
     const storeTokenInLS = (serverToken) => {
         setToken(serverToken);
@@ -99,6 +100,7 @@ export const AuthProvider = ({ children }) => {
                 const res = await result.json();
                 setData(res);
                 setCart(res['cart']);
+                setOrders(res['orders'].reverse());
                 getIngred();
             } catch (error) {
                 console.log(error);
@@ -133,7 +135,8 @@ export const AuthProvider = ({ children }) => {
             setDisplayRazorpay,
             setCart,
             address,
-            setAddress
+            setAddress,
+            orders
         }}>
             {children}
         </AuthContext.Provider>

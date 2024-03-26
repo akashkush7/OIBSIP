@@ -45,25 +45,9 @@ const userSchema = Schema({
     },
     orders: [
         {
-            order: {
-                type: Array,
-                default: [],
-            },
-            price: {
-                type: Number,
-                require: true,
-            },
-            address: {
-                type: String,
-                require: true,
-            },
             date: {
-                type: Date,
-                default: Date.now(),
-            },
-            orderStatus: {
                 type: String,
-                default: "Ordered",
+                default: Date(),
             },
             paymentStatus: {
                 type: String,
@@ -107,6 +91,37 @@ const ingredSchema = Schema({
     description: {
         type: String,
         default: "No Description",
+    }
+});
+
+const adminSchema = Schema({
+    order: {
+        type: Array,
+        default: [],
+    },
+    price: {
+        type: Number,
+        require: true,
+    },
+    address: {
+        type: String,
+        require: true,
+    },
+    date: {
+        type: String,
+        default: Date(),
+    },
+    orderStatus: {
+        type: String,
+        default: "Ordered",
+    },
+    paymentStatus: {
+        type: String,
+        require: true,
+    },
+    orderId: {
+        type: String,
+        require: true,
     }
 });
 
@@ -170,5 +185,6 @@ userSchema.methods.verifyPassword = async function (password) {
 const User = new model("User", userSchema);
 const Ingredient = new model("Ingredient", ingredSchema);
 const Otp = new model("Otp", otpSchema)
+const Admin = new model("Admin", adminSchema);
 
-module.exports = [User, Ingredient, Otp];
+module.exports = [User, Ingredient, Otp, Admin];

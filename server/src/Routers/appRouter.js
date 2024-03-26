@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../Controllers/appController");
+const admincontroller = require("../Controllers/adminController");
 const authSchema = require("../Validators/auth-validation");
 const validate = require("../middlewares/validation_middleware");
 
@@ -31,5 +32,7 @@ router.route('/order').post(controller.createPayment);
 router.route('/refund').post(controller.refund);
 
 router.route('/makeOrder').post(controller.makeOrder);
+
+router.route('/orderdetails').post(admincontroller.orderDetails);
 
 module.exports = router;

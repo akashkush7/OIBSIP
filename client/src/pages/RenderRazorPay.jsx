@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import crypto from 'crypto-js';
 import Axios from 'axios';
 import { useAuth } from '../store/auth';
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // Function to load script and append in DOM tree.
 const loadScript = src => new Promise((resolve) => {
@@ -27,7 +28,8 @@ const RenderRazorpay = ({
 }) => {
     const paymentId = useRef(null);
     const paymentMethod = useRef(null);
-    const { orderList, userData, total, address, setDisplayRazorpay } = useAuth();
+    const { orderList, userData, total, address, setDisplayRazorpay, setOrderList } = useAuth();
+    const navigate = useNavigate();
 
     // To load razorpay checkout modal script.
     const displayRazorpay = async (options) => {
@@ -75,6 +77,8 @@ const RenderRazorpay = ({
             const resData = await resOrder.json();
             if (resOrder.ok) {
                 toast.success(resData.msg);
+                setOrderList([]);
+                navigate('/service');
             } else {
                 toast.error(resData.msg);
             }
