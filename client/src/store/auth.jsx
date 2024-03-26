@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
     const getIngred = async () => {
         try {
-            const response = await fetch('http://localhost:8000/ingredient');
+            const response = await fetch('https://oibsip-3.onrender.com/ingredient');
             const resjson = await response.json();
             setIngred(resjson);
             fixPrices(resjson);
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
     const getUserInfo = async () => {
         if (isLoggedIn) {
             try {
-                const result = await fetch('http://localhost:8000/userinfo', {
+                const result = await fetch('https://oibsip-3.onrender.com/userinfo', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"

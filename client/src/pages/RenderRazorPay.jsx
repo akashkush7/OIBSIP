@@ -61,13 +61,13 @@ const RenderRazorpay = ({
 
     // informing server about payment
     const handlePayment = async (status, orderDetails = {}) => {
-        await Axios.post("http://localhost:8000/payment",
+        await Axios.post("https://oibsip-3.onrender.com/payment",
             {
                 status,
                 orderDetails,
             });
         if (status === "succeeded") {
-            const resOrder = await fetch("http://localhost:8000/makeOrder", {
+            const resOrder = await fetch("https://oibsip-3.onrender.com/makeOrder", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

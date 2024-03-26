@@ -11,7 +11,7 @@ const CartItems = ({ item }) => {
 
     const deleteChange = async () => {
         try {
-            const result = await fetch('http://localhost:8000/cart', {
+            const result = await fetch('https://oibsip-3.onrender.com/cart', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

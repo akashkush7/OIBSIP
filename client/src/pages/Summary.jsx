@@ -28,7 +28,7 @@ const Summary = () => {
                 return;
             }
 
-            const result = await fetch("http://localhost:8000/order", {
+            const result = await fetch("https://oibsip-3.onrender.com/order", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

@@ -9,9 +9,11 @@ const Service = () => {
     const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders } = useAuth();
     const navigate = useNavigate();
     const [seen, setSeen] = useState(false);
+    const [oid, setOid] = useState("");
 
-    function togglePop() {
+    function togglePop(orderid) {
         setSeen(!seen);
+        setOid(orderid);
     };
 
     const checkItems = () => {
@@ -28,7 +30,7 @@ const Service = () => {
 
             const addItem = addToCart();
             try {
-                const result = await fetch('http://localhost:8000/cart', {
+                const result = await fetch('https://oibsip-3.onrender.com/cart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -121,17 +123,16 @@ const Service = () => {
                                         return (
                                             <tr key={index}>
                                                 <th scope="row" className='fs-5'>{curr.orderId}</th>
-                                                <td><button className='btn btn-outline-dark' onClick={togglePop}>View Order Details</button>
-                                                    {seen ? <OrderDetails toggle={togglePop} id={curr.orderId} /> : null}</td>
+                                                <td><button className='btn btn-outline-dark' onClick={() => togglePop(curr.orderId)}>View Order Details</button></td>
                                                 <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
                                                 <td style={{ color: "green", fontWeight: "bold" }}>{curr.paymentStatus}</td>
                                             </tr>
                                         );
                                     })}
 
-
                                 </tbody>
                             </table>
+                            {seen ? <OrderDetails toggle={togglePop} id={oid} /> : null}
                         </div>
                     </div>
                 </div>

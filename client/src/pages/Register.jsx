@@ -41,7 +41,7 @@ const Register = () => {
         const email = data.email;
         console.log(email);
         try {
-            const result = await fetch("http://localhost:8000/verification/mail", {
+            const result = await fetch("https://oibsip-3.onrender.com/verification/mail", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
