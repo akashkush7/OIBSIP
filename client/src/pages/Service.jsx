@@ -7,7 +7,7 @@ import OrderDetails from './OrderDetails';
 
 
 const Service = () => {
-    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders } = useAuth();
+    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders, reset } = useAuth();
     const navigate = useNavigate();
     const [seen, setSeen] = useState(false);
     const [oid, setOid] = useState("");
@@ -76,6 +76,11 @@ const Service = () => {
     useEffect(() => {
         updateTotal();
     }, [radioOpt, options])
+
+    useEffect(() => {
+        reset();
+        getUserInfo();
+    }, []);
 
     return (
         <> {isLoggedIn ?

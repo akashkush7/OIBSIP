@@ -14,10 +14,7 @@ const Options = ({ item, optional, name }) => {
         radioChange(name, value);
     }
 
-    useEffect(() => {
-        reset();
-        getUserInfo();
-    }, []);
+
 
     return (
         <>

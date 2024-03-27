@@ -45,52 +45,6 @@ input[type="checkbox"] {
 }
 
 
-@media (max-width: 991px) {
-    #header {
-        height: 80vh;
-        text-align: center;
-        margin-top: 150px;
-    }
-
-    #header .header-img {
-        text-align: center;
-    }
-
-    #header .header-img img {
-        width: 60%;
-    }
-}
-
-@media (max-width: 768px) {
-
-    #header h1 {
-        font-size: 28px;
-    }
-
-    #header {
-        margin-top: 60px;
-    }
-
-    #header .header-img img {
-        width: 70%;
-    }
-}
-
-@media (max-width: 420px) {
-
-    #header h1 {
-        font-size: 28px;
-    }
-
-    #header {
-        margin-top: 50px;
-    }
-
-    #header .header-img img {
-        width: 90%;
-    }
-}
-
 @-webkit-keyframes mover {
     0% {
         transform: translateY(0);

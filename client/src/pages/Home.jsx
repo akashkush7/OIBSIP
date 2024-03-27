@@ -2,6 +2,7 @@ import Cards from "./Cards";
 import Img from './Images';
 
 const Home = () => {
+    const foo = new Array(6).fill().map(Math.random);
     const homeData = [
         {
             heading: "Hassle Free Service",
@@ -57,26 +58,17 @@ const Home = () => {
                 </button>
             </div>
             <h1 className='text-center font-heading' style={{ marginTop: "50px" }}>Welcome to the Best Pizza Delivery Service</h1><br />
-            <section id="header" className="d-flex align-items-center">
-
-                <div className="container-fluid">
-                    <div className="row d-flex">
-                        <div className="col-10 mx-auto">
-                            <div className="row">
-                                <div className="col-md-6 pt-1 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center flex-column">
-                                    <h2 className="m-5 font-heading">
-                                        Indulge in the convenience of our swift and reliable pizza delivery service. Savor every bite without leaving the comfort of your home. 🏠🍕
-                                    </h2>
-                                </div>
-                                <div className="col-lg-6 mt-md-5 mt-lg-5 order-1 order-lg-2 header-img">
-                                    <img className="img-fluid" src={Img["PizzaMain"]} alt="" />
-                                </div>
+            <div className="d-flex justify-content-center flex-wrap mx-4">
+                {
+                    foo.map((curr, index) => {
+                        return (
+                            <div style={{ width: "400px" }}>
+                                <img src={Img[`Pizza${index + 1}`]} alt="Pizza" style={{ width: "100%" }} />
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section><br /><br />
+                        );
+                    })
+                }
+            </div>
             <div className="d-flex justify-content-center align-items-center flex-wrap">
                 {homeData.map((curr, index) => {
                     return <Cards key={index} heading={curr.heading} para={curr.para} />
