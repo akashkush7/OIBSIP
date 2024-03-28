@@ -40,7 +40,7 @@ const Orders = () => {
             <div className='d-flex justify-content-center mt-5 mb-5 flex-wrap col-lg-4 m-3'>
                 {orders.map((curr, index) => {
                     return (
-                        <table className='table text-center' key={index}>
+                        <table className='table text-center reveal fade' key={index}>
                             <tbody>
                                 <tr className='table-dark'>
                                     <th>Order Id</th>

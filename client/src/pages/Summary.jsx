@@ -4,7 +4,7 @@ import RenderRazorpay from './RenderRazorPay';
 import { toast } from "react-toastify";
 
 const Summary = () => {
-    const { total, orderList, displayRazorpay, setDisplayRazorpay, address, setAddress } = useAuth();
+    const { total, orderList, displayRazorpay, setDisplayRazorpay, address, setAddress, isLoggedIn } = useAuth();
 
     const entries = orderList.map((item) => {
         return Object.entries(item["ingredients"])
@@ -59,13 +59,13 @@ const Summary = () => {
     }
 
     return (
-        <>
+        <>{isLoggedIn ? <>
             <h1 className='text-center font-heading mt-5'>Order Summary</h1>
             <div className='d-flex justify-content-center'>
                 <div className='mt-3 col-10'>
                     {entries.map((currItem, index) => {
                         return (
-                            <div key={index}>
+                            <div key={index} className='reveal fade'>
                                 <h4 className='font-heading text-center mt-3'>Custom Pizza {index + 1}</h4>
                                 <div className='d-flex justify-content-center'>
                                     <table className='table text-center'>
@@ -107,7 +107,7 @@ const Summary = () => {
                     orderId={orderDetails.orderId}
                 /> : <></>
             }
-        </>
+        </> : <><h1 className='text-center m-5 font-heading'>Please Login Before Using Our Services</h1></>}</>
     )
 }
 

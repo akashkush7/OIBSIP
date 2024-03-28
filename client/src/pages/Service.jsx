@@ -118,7 +118,7 @@ const Service = () => {
 
                         {orders.map((curr, index) => {
                             return (
-                                <table className='table text-center' key={index}>
+                                <table className='table text-center reveal fade' key={index}>
                                     <tbody>
                                         <tr>
                                             <th scope="col">Order Id</th>

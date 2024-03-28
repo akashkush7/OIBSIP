@@ -13,6 +13,7 @@ import { useAuth } from './store/auth'
 import Footer from './pages/Footer'
 import Cart from './pages/Cart'
 import Summary from './pages/Summary'
+import { Navigate } from 'react-router-dom'
 
 export const App = () => {
   const { getUserInfo, isLoggedIn } = useAuth();
@@ -57,6 +58,7 @@ export const App = () => {
         <Route path="/admin" element={<Admin />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/ordersummary" element={<Summary />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
     </>

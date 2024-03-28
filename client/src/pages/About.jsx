@@ -4,7 +4,7 @@ import Img from "./Images"
 const About = () => {
     return (
         <>
-            <section id="header" className="d-flex align-items-center mt-5">
+            <section id="header" className="d-flex align-items-center reveal fade">
 
                 <div className="container-fluid">
                     <div className="row d-flex">

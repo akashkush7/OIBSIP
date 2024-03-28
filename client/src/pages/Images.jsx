@@ -15,6 +15,7 @@ const IMAGES = {
     Pizza4: new URL('../Images/Pizza4.jpg', import.meta.url).href,
     Pizza5: new URL('../Images/Pizza5.jpg', import.meta.url).href,
     Pizza6: new URL('../Images/Pizza6.jpg', import.meta.url).href,
+    Cred: new URL('../Images/Cred.jpg', import.meta.url).href,
 }
 
 export default IMAGES

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useAuth } from '../store/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Img from "./Images"
 
 const Register = () => {
     const [data, setData] = useState({
@@ -110,42 +111,62 @@ const Register = () => {
     }
 
     return (
-
         <>
-            <section className="vh-100 gradient-custom">
+            <section>
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                            <div className="card text-white" style={{ borderRadius: "1rem", backgroundColor: "#F98866" }}>
-                                <div className="card-body p-3 pb-3 text-center">
-                                    <div className="mb-md-5 mt-md-4 pb-2">
-                                        <form>
-                                            <h2 className="fw-bold mb-2 text-uppercase">Register</h2>
-                                            <p className="text-white-75 mb-5">Please enter following Data</p>
-                                            <div className="form-outline form-white mb-4">
-                                                <input type="text" className="form-control form-control-lg" name="name" id="name" onChange={inputChange} value={data.name} placeholder='Enter Your Name' autoComplete='off' required />
-                                            </div>
-                                            <div className="form-outline form-white mb-4">
-                                                <input type="text" className="form-control form-control-lg" name="username" id="username" onChange={inputChange} value={data.username} placeholder='Select Username' autoComplete='off' required />
-                                            </div>
-                                            <div className="form-outline form-white mb-4">
-                                                <input type="email" className="form-control form-control-lg" name="email" id="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='off' required /><br />
+                        <div className="col col-xl-10">
+                            <div className="card" style={{ borderRadius: "1rem" }}>
+                                <div className="row g-0">
+                                    <div className="col-md-6 col-lg-5 d-none d-md-block">
+                                        <img src={Img['Cred']}
+                                            alt="login form" className="img-fluid" style={{ borderRadius: "1rem 0 0 0" }} />
+                                    </div>
+                                    <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                                        <div className="card-body p-4 p-lg-5 text-black">
+                                            <form>
+                                                <div className="d-flex align-items-center mb-3 pb-1">
+                                                    <i className="fas fa-cubes fa-2x me-3" style={{ color: "#ff6219" }}></i>
+                                                    <span className="h1 fw-bold mb-0">Pizza Delivery Service</span>
+                                                </div>
+
+                                                <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
+
+                                                <div className="form-outline mb-4">
+                                                    <input type="text" className="form-control form-control-lg" name="name" id="name" onChange={inputChange} value={data.name} placeholder='Enter Your Name' autoComplete='off' required />
+                                                    <label className="form-label" for="name">Name</label>
+                                                </div>
+                                                <div className="form-outline mb-4">
+                                                    <input type="text" className="form-control form-control-lg" name="username" id="username" onChange={inputChange} value={data.username} placeholder='Select Username' autoComplete='off' required />
+                                                    <label className="form-label" for="username">Username</label>
+                                                </div>
+                                                <div className="form-outline mb-4">
+                                                    <input type="text" className="form-control form-control-lg" name="phone" id="phone" onChange={inputChange} value={data.phone} placeholder='Mobile Number' autoComplete='off' required />
+                                                    <label className="form-label" for="phone">Phone Number</label>
+                                                </div>
+                                                <div className="form-outline mb-4">
+                                                    <input type="email" className="form-control form-control-lg" name="email" id="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='off' required />
+                                                    <label className="form-label" for="email">Email address</label>
+                                                </div>
                                                 {!verified ? data.email ? <div>
-                                                    <input type="text" className="form-control form-control-lg" name="otp" id="otp" onChange={inputChange} value={otp} placeholder='OTP' disabled={visible} autoComplete='off' required /><br />
+                                                    <input type="email" className="form-control form-control-lg" name="otp" id="otp" onChange={inputChange} value={otp} placeholder='OTP' disabled={visible} autoComplete='off' required /><br />
                                                     <div className='d-flex justify-content-around'>
-                                                        <button className='btn btn-outline-light btn-lg' onClick={sendOTP}>{clicked ? "Resend OTP" : "send OTP"}</button>
-                                                        {clicked ? <button className='btn btn-outline-light btn-lg' onClick={verifyMail}>Verify</button> : <></>}
+                                                        <div className="pt-1 mb-4">
+                                                            <button className="btn btn-dark btn-lg btn-block" onClick={sendOTP}>{clicked ? "Resend OTP" : "send OTP"}</button></div>
+                                                        {clicked ? <div className="pt-1 mb-4">
+                                                            <button className="btn btn-dark btn-lg btn-block" onClick={verifyMail}>Verify</button></div> : <></>}
                                                     </div>
                                                 </div> : <></> : <></>}
-                                            </div>
-                                            {verified ? <><div className="form-outline form-white mb-4">
-                                                <input type="password" className="form-control form-control-lg" name="password" id="password" onChange={inputChange} value={data.password} placeholder='Select Password' autoComplete='off' required />
-                                            </div>
-                                                <div className="form-outline form-white mb-4">
-                                                    <input type="text" className="form-control form-control-lg" name="phone" id="phone" onChange={inputChange} value={data.phone} placeholder='Mobile Number' autoComplete='off' required />
+                                                {verified ? <><div className="form-outline mb-4">
+                                                    <input type="password" className="form-control form-control-lg" name="password" id="password" onChange={inputChange} value={data.password} placeholder='Select Password' autoComplete='off' required />
                                                 </div>
-                                                <button className="btn btn-outline-light btn-lg px-5" type="submit" onClick={submitData}>Register</button></> : <></>}
-                                        </form>
+                                                    <div className="pt-1 mb-4">
+                                                        <button className="btn btn-dark btn-lg btn-block" type="submit" onClick={submitData}>Register</button></div></> : <></>}
+
+                                                <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>Already have an account? <NavLink to="/login"
+                                                    style={{ color: "#393f81" }}>Login here</NavLink></p>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
