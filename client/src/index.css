@@ -112,11 +112,11 @@ input[type="checkbox"] {
 }
 
 .fade-in-image {
-    animation: fadeIn 2s;
+    animation: moveSide 2s;
 }
 
-.active.fade-in-div {
-    animation: moveSide 1s;
+.fade-in-div {
+    animation: fadeIn 1s ease-in;
 }
 
 .active.move-up-div {
@@ -165,6 +165,15 @@ input[type="checkbox"] {
 }
 
 .reveal.active {
+    opacity: 1;
+}
+
+.reveal-true {
+    position: relative;
+    opacity: 0;
+}
+
+.reveal-true.active {
     opacity: 1;
 }
 

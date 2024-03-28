@@ -43,7 +43,7 @@ const Cart = () => {
                         <button type="submit" className='btn btn-outline-dark btn-lg fw-bold' onClick={submitChange}>Order Now</button>
                     </div>
                 </div>
-            </> : <></>}</>
+            </> : <><h1 className='font-heading mt-5 text-center'>Please Login before using our Services</h1></>}</>
     )
 }
 

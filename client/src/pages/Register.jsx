@@ -112,7 +112,7 @@ const Register = () => {
 
     return (
         <>
-            <section>
+            <section className='fade-in-div'>
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col col-xl-10">
