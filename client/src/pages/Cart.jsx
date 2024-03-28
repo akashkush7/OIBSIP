@@ -26,7 +26,7 @@ const Cart = () => {
     return (
         <>{isLoggedIn ?
             <>
-                <div className='text-center' style={{ marginTop: '100px' }}>
+                <div className='text-center mt-5'>
                     <h1 className='font-heading'>Cart Items</h1>
                     <p>Following are the items added to your Cart.</p>
                     <div className='d-flex justify-content-center'>

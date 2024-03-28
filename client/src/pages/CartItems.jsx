@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Img from "./Images";
 
 const CartItems = ({ item }) => {
-    const { userData, getUserInfo } = useAuth();
+    const { userData, getCartDetails } = useAuth();
     let ingredients = item['ingredients'];
     const entries = Object.entries(ingredients);
 
@@ -21,7 +21,7 @@ const CartItems = ({ item }) => {
             });
             const res = await result.json();
             if (result.ok) {
-                getUserInfo();
+                getCartDetails(userData);
                 toast.success(res.msg);
             } else {
                 toast.error(res.msg || "Internal Server Error");

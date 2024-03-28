@@ -7,14 +7,14 @@ import OrderDetails from './OrderDetails';
 
 
 const Service = () => {
-    const { ingred, isLoggedIn, addToCart, token, radioOpt, getUserInfo, setOrder, options, setTotal, total, prices, setOrderList, orders, reset } = useAuth();
+    const { userData, ingred, isLoggedIn, addToCart, token, radioOpt, setOrder, options, setTotal, total, prices, setOrderList, orders, reset, getCartDetails, getOrderDetails } = useAuth();
     const navigate = useNavigate();
     const [seen, setSeen] = useState(false);
     const [oid, setOid] = useState("");
 
     function togglePop(orderid) {
-        setSeen(!seen);
         setOid(orderid);
+        setSeen(!seen);
     };
 
     const checkItems = () => {
@@ -79,18 +79,19 @@ const Service = () => {
 
     useEffect(() => {
         reset();
-        getUserInfo();
+        getOrderDetails(userData);
     }, []);
 
     return (
         <> {isLoggedIn ?
             <>
-                <div className='text-center' style={{ marginTop: '100px' }}>
+                <div className='text-center mt-5'>
                     <h1 className='font-heading'>Order Now</h1>
-                    <p>Make Your own Pizza by choosing from the wide variety of ingredients available using following menu.</p>
+                    <p className='mx-3'>Make Your own Pizza by choosing from the wide variety of ingredients available using following menu.</p>
                     <div className='col-11 d-flex justify-content-end'>
+                        <h3 className='font-heading m-2'>Cart:</h3>
                         <div className='btn btn-outline-dark' onClick={() => {
-                            getUserInfo();
+                            getCartDetails(userData);
                             navigate("/cart");
                         }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" className="bi bi-cart"
@@ -106,42 +107,43 @@ const Service = () => {
                         return <Ingredients key={curr._id} name={curr.name} description={curr.description} price={curr.price} items={curr.items} optional={curr.optional} />
                     })}
                 </div>
-                <div className='col-11 d-flex justify-content-end'>
-                    <h3 className='m-2 font-heading size-font'>Total : {total} Rs.</h3>
-                    <button type="button" className='btn btn-outline-dark btn-lg mx-3 size-font' onClick={itemToCart}>Add to Cart</button>
-                    <button type="submit" className='btn btn-outline-dark btn-lg size-font' onClick={submitChange}>Buy Now</button>
+                <div className='col-lg-11 d-flex justify-content-end price-div m-3'>
+                    <h3 className='mt-2 font-heading'>Total : {total} Rs.</h3>
+                    <button type="button" className='btn btn-outline-dark btn-lg mx-2' onClick={itemToCart}>Add to Cart</button>
+                    <button type="submit" className='btn btn-outline-dark btn-lg' onClick={submitChange}>Buy Now</button>
                 </div>
-                <div className='mt-5'>
-                    <h1 className='font-heading text-center'>Order History</h1>
-                    <div className='d-flex justify-content-center'>
-                        <div className='d-flex justify-content-center mt-3 col-10'>
-                            <table className='table text-center' style={{ fontSize: "1.5vw" }}>
-                                <thead className='table-dark'>
-                                    <tr>
-                                        <th scope="col">Order Id</th>
-                                        <th scope="col">Order Date</th>
-                                        <th scope="col">Payment Status</th>
-                                        <th scope="col">Details</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {orders.map((curr, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <th scope="row">{curr.orderId}</th>
-                                                <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
-                                                <td style={{ color: "green", fontWeight: "bold" }}>{curr.paymentStatus}</td>
-                                                <td><button className='btn btn-outline-dark' style={{ fontSize: "1.5vw" }} onClick={() => togglePop(curr.orderId)}>View Details</button></td>
-                                            </tr>
-                                        );
-                                    })}
+                <div className='d-flex justify-content-center flex-column align-items-center'>
+                    <h1 className='font-heading text-center mt-5'>Order History</h1>
+                    <div className='d-flex justify-content-center m-3 mt-5 flex-wrap col-md-6 col-lg-4'>
 
-                                </tbody>
-                            </table>
-                            {seen ? <OrderDetails toggle={togglePop} id={oid} /> : null}
-                        </div>
+                        {orders.map((curr, index) => {
+                            return (
+                                <table className='table text-center' key={index}>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">Order Id</th>
+                                            <td scope="row">{curr.orderId}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Order Date</th>
+                                            <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Payment Status</th>
+                                            <td style={{ color: "green", fontWeight: "bold" }}>{curr.paymentStatus}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Details</th>
+                                            <td><button className='btn btn-outline-dark' onClick={() => togglePop(curr.orderId)}>View Details</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            );
+                        })}
                     </div>
                 </div>
+                {seen ? <OrderDetails toggle={togglePop} id={oid} /> : null}
+
             </> : <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Please Login before using Our Services</h1>}
         </>
     )

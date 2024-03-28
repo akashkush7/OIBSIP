@@ -92,7 +92,7 @@ const ingredient = async (req, res) => {
 
 const userData = async (req, res) => {
     try {
-        const result = await User.find({}, { password: 0 });
+        const result = await User.find({}, { password: 0, cart: 0, orders: 0 });
         if (result) {
             res.status(200).json(result);
         } else {
@@ -110,7 +110,7 @@ const userinfo = async (req, res) => {
         console.log(result);
         if (result) {
             const { userId } = result;
-            const userdata = await User.findOne({ _id: userId }).select({ password: 0 });
+            const userdata = await User.findOne({ _id: userId }).select({ password: 0, cart: 0, orders: 0 });
             res.status(200).json(userdata);
         } else {
             res.status(500).json({ msg: 'Internal Server Error' });
@@ -304,9 +304,9 @@ const refund = async (req, res) => {
 
 const makeOrder = async (req, res) => {
     try {
-        const { order, email, price, address, orderId, paymentStatus } = req.body;
+        const { order, email, price, address, orderId, paymentStatus, name, phone } = req.body;
         const resultUser = await User.updateOne({ email }, { $push: { orders: { orderId, paymentStatus } } });
-        const resultAdmin = await Admin.create({ order, price, address, orderId, paymentStatus });
+        const resultAdmin = await Admin.create({ order, name, phone, price, address, orderId, paymentStatus });
         if (order[0]['_id']) {
             await User.updateOne({ email }, { $set: { cart: [] } })
         }
@@ -320,4 +320,32 @@ const makeOrder = async (req, res) => {
     }
 }
 
-module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment, makeOrder };
+const recentOrders = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const result = await User.find({ email }).select({ orders: 1 }).slice('orders', -5);
+        if (result) {
+            res.status(200).send(result);
+        } else {
+            res.status(500).send("Internal Server Error");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const cartItems = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const result = await User.find({ email }).select({ cart: 1 });
+        if (result) {
+            res.status(200).send(result);
+        } else {
+            res.status(500).send("Internal Server Error");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment, makeOrder, recentOrders, cartItems };

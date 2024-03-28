@@ -62,14 +62,14 @@ const Home = () => {
                 {
                     foo.map((curr, index) => {
                         return (
-                            <div style={{ width: "400px" }}>
+                            <div className="reveal fade" style={{ width: "400px" }} key={index}>
                                 <img src={Img[`Pizza${index + 1}`]} alt="Pizza" style={{ width: "100%" }} />
                             </div>
                         );
                     })
                 }
             </div>
-            <div className="d-flex justify-content-center align-items-center flex-wrap">
+            <div className="d-flex justify-content-center align-items-center flex-wrap reveal fade-bottom">
                 {homeData.map((curr, index) => {
                     return <Cards key={index} heading={curr.heading} para={curr.para} />
                 })}

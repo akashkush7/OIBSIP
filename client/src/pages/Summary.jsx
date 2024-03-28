@@ -60,7 +60,7 @@ const Summary = () => {
 
     return (
         <>
-            <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Order Summary</h1>
+            <h1 className='text-center font-heading mt-5'>Order Summary</h1>
             <div className='d-flex justify-content-center'>
                 <div className='mt-3 col-10'>
                     {entries.map((currItem, index) => {

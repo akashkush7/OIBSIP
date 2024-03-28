@@ -72,7 +72,7 @@ const RenderRazorpay = ({
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ order: orderList, email: userData["email"], price: total, address, paymentStatus: status, orderId: orderDetails["orderId"] })
+                body: JSON.stringify({ order: orderList, name: userData["name"], phone: userData["phone"], email: userData["email"], price: total, address, paymentStatus: status, orderId: orderDetails["orderId"] })
             });
             const resData = await resOrder.json();
             if (resOrder.ok) {

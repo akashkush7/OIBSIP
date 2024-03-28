@@ -33,6 +33,14 @@ router.route('/refund').post(controller.refund);
 
 router.route('/makeOrder').post(controller.makeOrder);
 
+router.route('/recentorders').post(controller.recentOrders);
+
+router.route('/cartitems').post(controller.cartItems);
+
 router.route('/orderdetails').post(admincontroller.orderDetails);
+
+router.route('/getorders').get(admincontroller.getOrders);
+
+router.route('/updatestatus').post(admincontroller.updateStatus);
 
 module.exports = router;

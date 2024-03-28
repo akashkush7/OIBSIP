@@ -29,6 +29,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    font-size: xx-small;
 }
 
 input[type="checkbox"] {
@@ -92,4 +93,140 @@ input[type="checkbox"] {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.price-div h3 {
+    font-size: x-large;
+}
+
+.price-div button {
+    font-size: medium;
+}
+
+.color {
+    color: white;
+}
+
+.color:hover {
+    color: white;
+}
+
+.fade-in-image {
+    animation: fadeIn 2s;
+}
+
+.active.fade-in-div {
+    animation: moveSide 1s;
+}
+
+.active.move-up-div {
+    animation: moveUp 1s;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes moveSide {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+
+
+.reveal {
+    position: relative;
+    opacity: 0;
+}
+
+.reveal.active {
+    opacity: 1;
+}
+
+.active.fade-bottom {
+    animation: fade-bottom 1s ease-in;
+}
+
+.active.fade-left {
+    animation: fade-left 1s ease-in;
+}
+
+.active.fade-right {
+    animation: fade-right 1s ease-in;
+}
+
+.active.fade {
+    animation: fade 1s ease-in;
+}
+
+
+@keyframes fade-bottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-left {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-right {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

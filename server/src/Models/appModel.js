@@ -99,6 +99,14 @@ const adminSchema = Schema({
         type: Array,
         default: [],
     },
+    name: {
+        type: String,
+        require: true,
+    },
+    phone: {
+        type: String,
+        require: true,
+    },
     price: {
         type: Number,
         require: true,

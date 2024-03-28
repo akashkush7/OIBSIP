@@ -87,6 +87,42 @@ export const AuthProvider = ({ children }) => {
         return addItem["ingredients"];
     }
 
+    const getOrderDetails = async (data) => {
+        try {
+            const result = await fetch(`${import.meta.env.VITE_BASE_URL}/recentorders`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: data.email }),
+            });
+            const res = await result.json();
+            if (res.length > 0) {
+                setOrders(res[0]["orders"].reverse());
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getCartDetails = async (data) => {
+        try {
+            const result = await fetch(`${import.meta.env.VITE_BASE_URL}/cartitems`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: data.email }),
+            });
+            const res = await result.json();
+            if (result.ok) {
+                setCart(res[0]["cart"]);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const getUserInfo = async () => {
         if (isLoggedIn) {
             try {
@@ -100,8 +136,8 @@ export const AuthProvider = ({ children }) => {
                 });
                 const res = await result.json();
                 setData(res);
-                setCart(res['cart']);
-                setOrders(res['orders'].reverse());
+                getOrderDetails(res);
+                getCartDetails(res);
                 getIngred();
             } catch (error) {
                 console.log(error);
@@ -137,7 +173,9 @@ export const AuthProvider = ({ children }) => {
             setCart,
             address,
             setAddress,
-            orders
+            orders,
+            getOrderDetails,
+            getCartDetails,
         }}>
             {children}
         </AuthContext.Provider>

@@ -7,7 +7,7 @@ import { useAuth } from '../store/auth'
 const NavBar = () => {
     const { isLoggedIn, isAdmin } = useAuth();
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-black fixed-top" style={{ opacity: '80%' }}>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-black sticky-top" style={{ opacity: '80%' }}>
             <div className="container-fluid col-10 text-center">
                 <div>
                     {/* <img src={Logo} alt="SiteLogo" style={{ maxHeight: "25px" }} /> */}

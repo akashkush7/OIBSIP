@@ -4,7 +4,7 @@ import Img from "./Images"
 const About = () => {
     return (
         <>
-            <section id="header" className="d-flex align-items-center" style={{ marginTop: "100px" }}>
+            <section id="header" className="d-flex align-items-center mt-5">
 
                 <div className="container-fluid">
                     <div className="row d-flex">
@@ -16,7 +16,7 @@ const About = () => {
                                     </h2>
                                 </div>
                                 <div className="col-lg-6 mt-md-5 mt-lg-5 order-1 order-lg-2 header-img d-flex justify-content-center" style={{ maxWidth: "800px" }}>
-                                    <img className="img-fluid" src={Img["PizzaMain"]} alt="" style={{ width: "80%" }} />
+                                    <img className="img-fluid" src={Img["PizzaMain"]} alt="" style={{ width: "80%", height: "100%" }} />
                                 </div>
                             </div>
                         </div>
