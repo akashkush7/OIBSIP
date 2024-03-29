@@ -19,7 +19,7 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item"><NavLink className="nav-link" to="/"><h6 data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Home</h6></NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/contact"><h6 data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Contact</h6></NavLink></li>
+                        {/* <li className="nav-item"><NavLink className="nav-link" to="/contact"><h6 data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Contact</h6></NavLink></li> */}
                         <li className="nav-item"><NavLink className="nav-link" to="/about"><h6 data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">About</h6></NavLink></li>
                         {isLoggedIn ?
                             <> <li className="nav-item"><NavLink className="nav-link" to="/service"><h6 data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Order Now</h6></NavLink></li>

@@ -5,7 +5,7 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Service from './pages/Service'
 import NavBar from './pages/NavBar'
-import Contact from './pages/Ingred'
+// import Contact from './pages/Contact'
 import About from './pages/About'
 import Admin from './pages/Admin'
 import { Routes, Route } from 'react-router-dom'
@@ -48,7 +48,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
         <Route path="/service" element={<Service />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
