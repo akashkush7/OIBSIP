@@ -62,14 +62,13 @@ const login = async (req, res) => {
 
 const updateingred = async (req, res) => {
     try {
-        const { name, price, stock, description } = req.body;
-        const itemExist = await Ingredient.findOne({ name });
+        const { _id, price, stock } = req.body;
+        const result = await Ingredient.updateOne({ _id }, { $set: { price, stock } });
 
-        if (itemExist) {
-            return res.status(400).send("Item Already Exits");
+        if (result) {
+            return res.status(200).json({ msg: "Update Successfull" });
         } else {
-            const result = await Ingredient.create({ name, price, stock, description });
-            res.status(200).json({ msg: "Item Added" });
+            res.status(500).json({ msg: "Update Failed" });
         }
     } catch (error) {
         err = { status: 400 };
@@ -142,8 +141,8 @@ const sendmail = async (req, res) => {
                 let transporter = nodemailer.createTransport({
                     service: "gmail",
                     auth: {
-                        user: "instaidanime@gmail.com",
-                        pass: "usqdusszkmfzvotp",
+                        user: process.env.AUTH_ID,
+                        pass: process.env.AUTH_PASS,
                     },
                 });
 
@@ -223,8 +222,8 @@ const deleteFromCart = async (req, res) => {
 
 const createPayment = async (req, res) => {
     const razorpay = new Razorpay({
-        key_id: 'rzp_test_AD88GErZRnFY7V',
-        key_secret: 'zuprjSXKrG1ybXqzzBocOnre'
+        key_id: process.env.RAZOR_ID,
+        key_secret: process.env.RAZOR_PASS,
     });
 
     const options = {

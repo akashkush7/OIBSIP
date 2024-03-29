@@ -25,7 +25,7 @@ const Home = () => {
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
-                <div className="carousel-inner">
+                <div className="carousel-inner fade-in-div">
                     <div className="carousel-item active" data-bs-interval="5000">
                         <img src={Img["Slide1"]} className="d-block w-100" alt="Awesome Pizza" style={{ maxHeight: "500px", overflow: "hidden", objectFit: "cover" }} />
                         <div className="carousel-caption d-none d-md-block">
@@ -62,7 +62,7 @@ const Home = () => {
                 {
                     foo.map((curr, index) => {
                         return (
-                            <div className="reveal fade" style={{ width: "400px" }} key={index}>
+                            <div className="fade-in-div" style={{ width: "400px" }} key={index}>
                                 <img src={Img[`Pizza${index + 1}`]} alt="Pizza" style={{ width: "100%" }} />
                             </div>
                         );

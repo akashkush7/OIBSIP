@@ -37,15 +37,12 @@ const loginSchema = z.object({
 });
 
 const itemSchema = z.object({
-    name: z
-        .string({ required_error: 'Item Name is required' })
-        .trim(),
+    _id: z
+        .string({ required_error: "Unique Key is required" }),
     price: z
         .number({ required_error: "Price of item is required" }),
     stock: z
         .number({ required_error: "Stock can,t be zero" }),
-    description: z
-        .string(),
 });
 
 module.exports = { signupSchema, loginSchema, itemSchema };

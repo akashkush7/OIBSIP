@@ -87,7 +87,7 @@ const RenderRazorpay = ({
 
 
     const options = {
-        key: "rzp_test_AD88GErZRnFY7V", // key id from props but been used directly
+        key: import.meta.env.VITE_RAZOR_KEY, // key id from props but been used directly
         amount, // Amount in lowest denomination from props
         currency, // Currency from props.
         name: 'Pizza Delivery Service', // Title for your organization to display in checkout modal
@@ -99,7 +99,7 @@ const RenderRazorpay = ({
             paymentId.current = response.razorpay_payment_id;
 
             // Most important step to capture and authorize the payment. This can be done of Backend server.
-            const succeeded = crypto.HmacSHA256(`${orderId}|${response.razorpay_payment_id}`, "zuprjSXKrG1ybXqzzBocOnre").toString() === response.razorpay_signature;
+            const succeeded = crypto.HmacSHA256(`${orderId}|${response.razorpay_payment_id}`, import.meta.env.VITE_RAZOR_PASS).toString() === response.razorpay_signature;
 
             // If successfully authorized. Then we can consider the payment as successful.
             if (succeeded) {

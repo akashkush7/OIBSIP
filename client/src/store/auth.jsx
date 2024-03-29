@@ -176,6 +176,7 @@ export const AuthProvider = ({ children }) => {
             orders,
             getOrderDetails,
             getCartDetails,
+            getIngred,
         }}>
             {children}
         </AuthContext.Provider>

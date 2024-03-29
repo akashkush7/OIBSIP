@@ -5,7 +5,7 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Service from './pages/Service'
 import NavBar from './pages/NavBar'
-import Contact from './pages/Contact'
+import Contact from './pages/Ingred'
 import About from './pages/About'
 import Admin from './pages/Admin'
 import { Routes, Route } from 'react-router-dom'
@@ -24,11 +24,9 @@ export const App = () => {
     for (var i = 0; i < reveals.length; i++) {
       var windowHeight = window.innerHeight;
       var elementTop = reveals[i].getBoundingClientRect().top;
-      var elementVisible = 150;
+      var elementVisible = 0;
       if (elementTop < windowHeight - elementVisible) {
         reveals[i].classList.add("active");
-      } else {
-        reveals[i].classList.remove("active");
       }
     }
   }

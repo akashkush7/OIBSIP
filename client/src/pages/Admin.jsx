@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Orders from './Orders';
 import Users from './Users';
-import Requests from './Requests';
+import Ingredientts from './Ingred';
 
 const Admin = () => {
     const [active, setActive] = useState("orders");
@@ -22,12 +22,12 @@ const Admin = () => {
                         <button className="nav-link rounded-5 color" id="users" data-bs-toggle="tab" type="button" role="tab" onClick={changeActive} aria-selected="false">Users</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                        <button className="nav-link rounded-5 color" id="requests" data-bs-toggle="tab" type="button" role="tab" onClick={changeActive} aria-selected="false">Contact</button>
+                        <button className="nav-link rounded-5 color" id="ingredients" data-bs-toggle="tab" type="button" role="tab" onClick={changeActive} aria-selected="false">Ingredients</button>
                     </li>
                 </ul>
             </div>
             <div className='d-flex justify-content-center flex-column align-items-center'>
-                {active === "orders" ? <Orders /> : active === "users" ? <Users /> : <Requests />}
+                {active === "orders" ? <Orders /> : active === "users" ? <Users /> : <Ingredientts />}
             </div>
         </>
     )

@@ -48,7 +48,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
 
     return (
         <>
-            <div className='popup'>
+            <div className='popup fade-in-div'>
                 <div className='popup-inner'>
                     <h2 className='text-center fw-bold'>Order Details</h2>
                     <table className='table text-center'>

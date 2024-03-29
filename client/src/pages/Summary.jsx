@@ -65,7 +65,7 @@ const Summary = () => {
                 <div className='mt-3 col-10'>
                     {entries.map((currItem, index) => {
                         return (
-                            <div key={index} className='reveal fade'>
+                            <div key={index} className='fade-in-div'>
                                 <h4 className='font-heading text-center mt-3'>Custom Pizza {index + 1}</h4>
                                 <div className='d-flex justify-content-center'>
                                     <table className='table text-center'>
