@@ -35,6 +35,8 @@ router.route('/makeOrder').post(controller.makeOrder);
 
 router.route('/recentorders').post(controller.recentOrders);
 
+router.route('/changepassword').post(controller.changePassword);
+
 router.route('/cartitems').post(controller.cartItems);
 
 router.route('/orderdetails').post(admincontroller.orderDetails);

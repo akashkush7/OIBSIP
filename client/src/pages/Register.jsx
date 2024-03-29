@@ -18,7 +18,6 @@ const Register = () => {
     const [verified, setVer] = useState(false);
 
     const [otp, setOTP] = useState("");
-    const [resOTP, setResOTP] = useState("");
 
     const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
@@ -47,7 +46,7 @@ const Register = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, reset: false })
             })
 
             const res = await result.json();
@@ -129,7 +128,7 @@ const Register = () => {
                                                     <span className="h1 fw-bold mb-0">Pizza Delivery Service</span>
                                                 </div>
 
-                                                <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
+                                                <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Register new account</h5>
 
                                                 <div className="form-outline mb-4">
                                                     <input type="text" className="form-control form-control-lg" name="name" id="name" onChange={inputChange} value={data.name} placeholder='Enter Your Name' autoComplete='new' required />

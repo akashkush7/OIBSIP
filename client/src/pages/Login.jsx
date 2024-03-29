@@ -3,12 +3,16 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { useAuth } from '../store/auth';
 import Img from "./Images";
+import ResetPass from "./ResetPass";
 
 const Login = () => {
     const [data, setData] = useState({
         email: "",
         password: "",
     });
+
+    const [reset, setReset] = useState(false);
+
     const navigate = useNavigate();
     const { storeTokenInLS } = useAuth();
 
@@ -21,6 +25,10 @@ const Login = () => {
             [name]: value
         });
     };
+
+    const toggleReset = () => {
+        setReset(!reset);
+    }
 
     const submitData = async (e) => {
         e.preventDefault();
@@ -80,6 +88,9 @@ const Login = () => {
                                                 <div className="pt-1 mb-4">
                                                     <button className="btn btn-dark btn-lg btn-block" type="submit" onClick={submitData}>Login</button>
                                                 </div>
+                                                <div>
+                                                    <p className="mb-5 pb-lg-2" style={{ color: "#393f81", cursor: "pointer" }} onClick={toggleReset}>Forgot Password</p>
+                                                </div>
 
                                                 <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>Don't have an account? <NavLink to="/register"
                                                     style={{ color: "#393f81" }}>Register here</NavLink></p>
@@ -93,6 +104,7 @@ const Login = () => {
                     </div>
                 </div>
             </section>
+            {reset ? <ResetPass toggle={toggleReset} /> : <></>}
         </>
     )
 }

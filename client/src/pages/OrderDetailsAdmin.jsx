@@ -50,7 +50,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
         <>
             <div className='popup fade-in-div'>
                 <div className='popup-inner'>
-                    <h2 className='text-center fw-bold'>Order Details</h2>
+                    <h2 className='text-center fw-bold font-heading'>Order Details</h2>
                     <table className='table text-center'>
                         <tbody>
                             <tr>

@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const validator = require("validator");
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
     try {
@@ -130,10 +131,10 @@ const generateOTP = () => {
 
 const sendmail = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email, reset } = req.body;
         if (validator.isEmail(email)) {
             const userExist = await User.findOne({ email });
-            if (userExist) {
+            if (userExist && !reset) {
                 res.status(400).json({ msg: "Email is already in use." });
                 return;
             } else {
@@ -347,4 +348,20 @@ const cartItems = async (req, res) => {
     }
 }
 
-module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment, makeOrder, recentOrders, cartItems };
+const changePassword = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const saltLength = await bcrypt.genSalt(5);
+        const hash_password = await bcrypt.hash(password, saltLength);
+        const result = await User.updateOne({ email }, { $set: { password: hash_password } });
+        if (result) {
+            res.status(200).json({ msg: "Password Changed Successfully" });
+        } else {
+            res.status(500).json({ msg: "Failed Try Later" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { register, login, ingredient, updateingred, userData, userinfo, sendmail, varifyMail, addToCart, deleteFromCart, paymentCapture, refund, createPayment, makeOrder, recentOrders, cartItems, changePassword };
