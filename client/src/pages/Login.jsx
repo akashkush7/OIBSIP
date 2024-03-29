@@ -62,20 +62,19 @@ const Login = () => {
                                             <form>
 
                                                 <div className="d-flex align-items-center mb-3 pb-1">
-                                                    <i className="fas fa-cubes fa-2x me-3" style={{ color: "#ff6219" }}></i>
                                                     <span className="h1 fw-bold mb-0">Pizza Delivery Service</span>
                                                 </div>
 
                                                 <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="email" className="form-control form-control-lg" name="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='off' required />
-                                                    <label className="form-label" for="email">Email address</label>
+                                                    <input type="email" className="form-control form-control-lg" name="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='new' required />
+                                                    <label className="form-label" htmlFor="email">Email address</label>
                                                 </div>
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="password" className="form-control form-control-lg" name='password' onChange={inputChange} value={data.password} placeholder='Enter Your Password' autoComplete='off' required />
-                                                    <label className="form-label" for="password">Password</label>
+                                                    <input type="password" className="form-control form-control-lg" name='password' onChange={inputChange} value={data.password} placeholder='Enter Your Password' autoComplete='new' required />
+                                                    <label className="form-label" htmlFor="password">Password</label>
                                                 </div>
 
                                                 <div className="pt-1 mb-4">

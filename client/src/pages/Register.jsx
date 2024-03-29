@@ -126,30 +126,29 @@ const Register = () => {
                                         <div className="card-body p-4 p-lg-5 text-black">
                                             <form>
                                                 <div className="d-flex align-items-center mb-3 pb-1">
-                                                    <i className="fas fa-cubes fa-2x me-3" style={{ color: "#ff6219" }}></i>
                                                     <span className="h1 fw-bold mb-0">Pizza Delivery Service</span>
                                                 </div>
 
                                                 <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Sign into your account</h5>
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="text" className="form-control form-control-lg" name="name" id="name" onChange={inputChange} value={data.name} placeholder='Enter Your Name' autoComplete='off' required />
-                                                    <label className="form-label" for="name">Name</label>
+                                                    <input type="text" className="form-control form-control-lg" name="name" id="name" onChange={inputChange} value={data.name} placeholder='Enter Your Name' autoComplete='new' required />
+                                                    <label className="form-label" htmlFor="name">Name</label>
                                                 </div>
                                                 <div className="form-outline mb-4">
-                                                    <input type="text" className="form-control form-control-lg" name="username" id="username" onChange={inputChange} value={data.username} placeholder='Select Username' autoComplete='off' required />
-                                                    <label className="form-label" for="username">Username</label>
+                                                    <input type="text" className="form-control form-control-lg" name="username" id="username" onChange={inputChange} value={data.username} placeholder='Select Username' autoComplete='new' required />
+                                                    <label className="form-label" htmlFor="username">Username</label>
                                                 </div>
                                                 <div className="form-outline mb-4">
-                                                    <input type="text" className="form-control form-control-lg" name="phone" id="phone" onChange={inputChange} value={data.phone} placeholder='Mobile Number' autoComplete='off' required />
-                                                    <label className="form-label" for="phone">Phone Number</label>
+                                                    <input type="text" className="form-control form-control-lg" name="phone" id="phone" onChange={inputChange} value={data.phone} placeholder='Mobile Number' autoComplete='new' required />
+                                                    <label className="form-label" htmlFor="phone">Phone Number</label>
                                                 </div>
                                                 <div className="form-outline mb-4">
-                                                    <input type="email" className="form-control form-control-lg" name="email" id="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='off' required />
-                                                    <label className="form-label" for="email">Email address</label>
+                                                    <input type="email" className="form-control form-control-lg" name="email" id="email" onChange={inputChange} value={data.email} placeholder='Enter Your E-mail' autoComplete='new' disabled={clicked} required />
+                                                    <label className="form-label" htmlFor="email">Email address</label>
                                                 </div>
                                                 {!verified ? data.email ? <div>
-                                                    <input type="email" className="form-control form-control-lg" name="otp" id="otp" onChange={inputChange} value={otp} placeholder='OTP' disabled={visible} autoComplete='off' required /><br />
+                                                    <input type="text" className="form-control form-control-lg" name="otp" id="otp" onChange={inputChange} value={otp} placeholder='OTP' disabled={visible} autoComplete='new' required /><br />
                                                     <div className='d-flex justify-content-around'>
                                                         <div className="pt-1 mb-4">
                                                             <button className="btn btn-dark btn-lg btn-block" onClick={sendOTP}>{clicked ? "Resend OTP" : "send OTP"}</button></div>
