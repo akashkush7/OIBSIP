@@ -58,6 +58,7 @@ const updateStocks = async (item) => {
 }
 
 const updateStatus = async (req, res) => {
+    //To update the stocks and the order Status.
     const { orderId, orderStatus } = req.body;
     if (orderStatus === "Out-For-Delivery") {
         let ingredients = {

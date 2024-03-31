@@ -39,7 +39,6 @@ const Register = () => {
     const sendOTP = async (e) => {
         e.preventDefault();
         const email = data.email;
-        console.log(email);
         try {
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/verification/mail`, {
                 method: "POST",

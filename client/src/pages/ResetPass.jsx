@@ -83,7 +83,6 @@ const ResetPass = ({ toggle }) => {
                 body: JSON.stringify({ email: data.email, password: data.password }),
             });
             const resData = await result.json();
-            console.log(resData);
             if (result.ok) {
                 toast.success(resData.msg);
                 toggle();

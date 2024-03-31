@@ -1,5 +1,7 @@
 const { z } = require('zod');
 
+//it will send the response data to the client if he/she enters wrong data on either register or login forms.
+//It validates the data filled by user.
 const signupSchema = z.object({
     name: z
         .string({ required_error: "Name is required" }),

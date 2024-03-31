@@ -8,6 +8,7 @@ const errorMiddleware = require("./middlewares/error_middleware");
 
 const port = process.env.PORT || 8000;
 
+//cors for client site to send request to server.
 const corsOptions = {
     origin: ["https://oibsip-client.onrender.com", "http://localhost:5173"],
     methods: "GET, POST, PATCH, DELETE, HEAD",
@@ -28,3 +29,5 @@ connection().then(() => {
         console.log(`listening at port : ${port}`);
     })
 });
+
+// All the environment Variables are here but not be pushed to the repository cause i will provide environment variables to the hosting  comapany.

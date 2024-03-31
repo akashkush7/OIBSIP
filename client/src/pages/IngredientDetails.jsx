@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { toast } from "react-toastify";
 
 const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
@@ -13,7 +13,6 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
     };
 
     const askToSave = async () => {
-        console.log(newData.price);
         if (window.confirm("Do You want to save the Stocks and Prices")) {
             try {
                 const result = await fetch(`${import.meta.env.VITE_BASE_URL}/ingredient`, {
@@ -88,7 +87,6 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
                                 </thead>
                                 <tbody>
                                     {toDisplay["items"].map((item, index) => {
-                                        {/* let entries = Object.entries(item["ingredients"]); */ }
                                         return (
                                             <tr key={index}>
                                                 <td>{item}</td>

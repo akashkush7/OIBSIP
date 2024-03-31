@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Orders from './Orders';
 import Users from './Users';
 import Ingredientts from './Ingred';

@@ -67,7 +67,6 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                             </tr>
                             <tr>
                                 <th>Order Status</th>
-                                {/* <td>{data.orderStatus}</td> */}
                                 <td>
                                     <select name="order-status" id="order-status" defaultValue={data.orderStatus} onChange={setStatus}>
                                         <option value="Ordered" >Ordered</option>

@@ -152,7 +152,7 @@ const sendmail = async (req, res) => {
                     to: `${email}`, // list of receivers
                     subject: "To Register on Pizza Delivery Service", // Subject line
                     text: "Registration OTP", // plain text body
-                    html: `<b>Your OTP for registration on Pizza Delivery Service is ${otp}</b>`, // html body
+                    html: `<h1>Your OTP from Pizza Delivery Service is ${otp}</h1>`, // html body
                 });
 
                 if (info) {
