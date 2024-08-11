@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify";
+import SpinLoader from './SpinLoader';
 
 const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
     const [seen, setSeen] = useState(false);
@@ -8,9 +9,11 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
     const togglePop = () => {
         setSeen(!seen);
     };
+    const [loader, setLoader] = useState(false);
 
     const askToSave = async () => {
         if (window.confirm("Do You want to save the Order Status")) {
+            setLoader(true);
             try {
                 const result = await fetch(`${import.meta.env.VITE_BASE_URL}/updatestatus`, {
                     method: "POST",
@@ -20,6 +23,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                     body: JSON.stringify({ orderId: data.orderId, orderStatus: newStatus }),
                 })
                 const res = await result.json();
+                setLoader(false);
                 if (result.ok) {
                     toast.success(res.msg);
                     fetchOrders();
@@ -27,6 +31,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                     toast.error(res.msg);
                 }
             } catch (error) {
+                setLoader(false);
                 console.log(error);
             }
         }
@@ -134,6 +139,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                     </div>
                 </div>
             </div>
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

@@ -4,12 +4,15 @@ import { toast } from "react-toastify";
 import { useAuth } from '../store/auth';
 import Img from "./Images";
 import ResetPass from "./ResetPass";
+import SpinLoader from './SpinLoader';
 
 const Login = () => {
     const [data, setData] = useState({
         email: "",
         password: "",
     });
+
+    const [loader, setLoader] = useState(false);
 
     const [reset, setReset] = useState(false);
 
@@ -32,6 +35,7 @@ const Login = () => {
 
     const submitData = async (e) => {
         e.preventDefault();
+        setLoader(true)
         try {
             const res = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
                 method: 'POST',
@@ -41,6 +45,7 @@ const Login = () => {
                 body: JSON.stringify(data),
             });
             const resData = await res.json();
+            setLoader(false)
             if (res.ok) {
                 storeTokenInLS(resData.token);
                 toast.success("Login Successfull");
@@ -49,6 +54,7 @@ const Login = () => {
                 toast.error(resData.extraDetails ? resData.extraDetails : "Invalid Credentials");
             }
         } catch (err) {
+            setLoader(false);
             console.log(err);
         }
     };
@@ -105,6 +111,7 @@ const Login = () => {
                 </div>
             </section>
             {reset ? <ResetPass toggle={toggleReset} /> : <></>}
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

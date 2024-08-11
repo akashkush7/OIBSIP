@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import SpinLoader from './SpinLoader';
 
 const OrderDetails = ({ toggle, id }) => {
     const [data, setData] = useState({});
@@ -7,9 +8,11 @@ const OrderDetails = ({ toggle, id }) => {
     const togg = () => {
         setSeen(!seen);
     }
+    const [loader, setLoader] = useState(false);
     const orderData = async () => {
         if (id !== null) {
-            console.log(id);
+            // console.log(id);
+            setLoader(true);
             try {
                 const result = await fetch(`${import.meta.env.VITE_BASE_URL}/orderdetails`, {
                     method: 'POST',
@@ -20,12 +23,14 @@ const OrderDetails = ({ toggle, id }) => {
                 });
                 const res = await result.json();
                 // console.log(res);
+                setLoader(false);
                 if (result.ok) {
                     setL(res['order']);
                     setData(res);
                     togg();
                 }
             } catch (error) {
+                setLoader(false);
                 console.log(error);
             }
         }
@@ -73,6 +78,7 @@ const OrderDetails = ({ toggle, id }) => {
                         </div>
                     </div>
                 </div></> : <></>}
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

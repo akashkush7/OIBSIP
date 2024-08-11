@@ -33,6 +33,7 @@ const RenderRazorpay = ({
 
     // To load razorpay checkout modal script.
     const displayRazorpay = async (options) => {
+
         const res = await loadScript(
             'https://checkout.razorpay.com/v1/checkout.js',
         );

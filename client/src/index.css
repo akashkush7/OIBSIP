@@ -95,6 +95,15 @@ input[type="checkbox"] {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+.loader {
+    background-color: transparent;
+    position: absolute;
+    object-fit: contain;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .price-div h3 {
     font-size: x-large;
 }

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify"
 import OrderDetailsAdmin from './OrderDetailsAdmin';
+import SpinLoader from './SpinLoader';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [seen, setSeen] = useState(false);
     const [toDisplay, setToDisplay] = useState({});
+    const [loader, setLoader] = useState(false);
     const getOrders = async () => {
+        setLoader(true);
         try {
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/getorders`, {
                 method: "GET",
@@ -15,12 +18,14 @@ const Orders = () => {
                 },
             })
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 setOrders(res);
             } else {
                 toast.error(res.msg);
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     }
@@ -64,6 +69,7 @@ const Orders = () => {
                 })}
             </div >
             {seen ? <OrderDetailsAdmin toggle={togglePop} data={toDisplay} fetchOrders={getOrders} /> : <></>}
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

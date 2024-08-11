@@ -3,6 +3,7 @@ import { useAuth } from '../store/auth';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Img from "./Images"
+import SpinLoader from './SpinLoader';
 
 const Register = () => {
     const [data, setData] = useState({
@@ -18,6 +19,7 @@ const Register = () => {
     const [verified, setVer] = useState(false);
 
     const [otp, setOTP] = useState("");
+    const [loader, setLoader] = useState(false);
 
     const { storeTokenInLS } = useAuth();
     const navigate = useNavigate();
@@ -40,6 +42,7 @@ const Register = () => {
         e.preventDefault();
         const email = data.email;
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/verification/mail`, {
                 method: "POST",
                 headers: {
@@ -49,6 +52,7 @@ const Register = () => {
             })
 
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 setClick(true);
                 setVis(false);
@@ -57,6 +61,7 @@ const Register = () => {
                 toast.error(res.msg)
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     };
@@ -64,6 +69,7 @@ const Register = () => {
     const verifyMail = async (e) => {
         e.preventDefault();
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/verification/otp`, {
                 method: "POST",
                 headers: {
@@ -72,6 +78,7 @@ const Register = () => {
                 body: JSON.stringify({ email: data.email, otp: otp }),
             });
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 setVer(true);
                 toast.success(res.msg);
@@ -79,6 +86,7 @@ const Register = () => {
                 toast.error(res.msg);
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     };
@@ -86,6 +94,7 @@ const Register = () => {
     const submitData = async (e) => {
         e.preventDefault();
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/register`, {
                 method: 'POST',
                 headers: {
@@ -94,6 +103,7 @@ const Register = () => {
                 body: JSON.stringify(data),
             });
             const resData = await result.json();
+            setLoader(false);
             console.log(resData);
             if (result.ok) {
                 storeTokenInLS(resData.token);
@@ -104,6 +114,7 @@ const Register = () => {
                 toast.error(resData.extraDetails ? resData.extraDetails : resData.msg);
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     }
@@ -171,6 +182,7 @@ const Register = () => {
                     </div>
                 </div>
             </section>
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

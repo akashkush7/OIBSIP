@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from "react-toastify"
+import SpinLoader from './SpinLoader';
 
 const ResetPass = ({ toggle }) => {
     const [data, setData] = useState({
@@ -11,6 +12,7 @@ const ResetPass = ({ toggle }) => {
     const [clicked, setClick] = useState(false);
     const [visible, setVis] = useState(true);
     const [verified, setVer] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -29,6 +31,7 @@ const ResetPass = ({ toggle }) => {
         e.preventDefault();
         const email = data.email;
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/verification/mail`, {
                 method: "POST",
                 headers: {
@@ -38,6 +41,7 @@ const ResetPass = ({ toggle }) => {
             })
 
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 setClick(true);
                 setVis(false);
@@ -46,6 +50,7 @@ const ResetPass = ({ toggle }) => {
                 toast.error(res.msg)
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     };
@@ -53,6 +58,7 @@ const ResetPass = ({ toggle }) => {
     const verifyMail = async (e) => {
         e.preventDefault();
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/verification/otp`, {
                 method: "POST",
                 headers: {
@@ -61,6 +67,7 @@ const ResetPass = ({ toggle }) => {
                 body: JSON.stringify({ email: data.email, otp }),
             });
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 setVer(true);
                 toast.success(res.msg);
@@ -68,6 +75,7 @@ const ResetPass = ({ toggle }) => {
                 toast.error(res.msg);
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     };
@@ -75,6 +83,7 @@ const ResetPass = ({ toggle }) => {
     const submitData = async (e) => {
         e.preventDefault();
         try {
+            setLoader(true);
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/changepassword`, {
                 method: 'POST',
                 headers: {
@@ -83,6 +92,7 @@ const ResetPass = ({ toggle }) => {
                 body: JSON.stringify({ email: data.email, password: data.password }),
             });
             const resData = await result.json();
+            setLoader(false);
             if (result.ok) {
                 toast.success(resData.msg);
                 toggle();
@@ -90,6 +100,7 @@ const ResetPass = ({ toggle }) => {
                 toast.error(resData.msg);
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     }
@@ -123,6 +134,7 @@ const ResetPass = ({ toggle }) => {
                     </div>
                 </div>
             </div>
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

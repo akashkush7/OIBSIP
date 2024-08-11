@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../store/auth';
 import { toast } from 'react-toastify';
 import Img from "./Images";
+import SpinLoader from './SpinLoader';
 
 const CartItems = ({ item }) => {
     const { userData, getCartDetails } = useAuth();
     let ingredients = item['ingredients'];
     const entries = Object.entries(ingredients);
 
+    const [loader, setLoader] = useState(false);
+
     const itemId = item['_id']
 
     const deleteChange = async () => {
+        setLoader(true);
         try {
             const result = await fetch(`${import.meta.env.VITE_BASE_URL}/cart`, {
                 method: 'PATCH',
@@ -20,6 +24,7 @@ const CartItems = ({ item }) => {
                 body: JSON.stringify({ _id: itemId, email: userData['email'] }),
             });
             const res = await result.json();
+            setLoader(false);
             if (result.ok) {
                 getCartDetails(userData);
                 toast.success(res.msg);
@@ -27,6 +32,7 @@ const CartItems = ({ item }) => {
                 toast.error(res.msg || "Internal Server Error");
             }
         } catch (error) {
+            setLoader(false);
             console.log(error);
         }
     }
@@ -69,6 +75,7 @@ const CartItems = ({ item }) => {
                     </button>
                 </div>
             </div>
+            {loader ? <SpinLoader /> : <></>}
         </div>
     )
 }

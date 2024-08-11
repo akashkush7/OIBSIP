@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import OrderDetails from './OrderDetails';
+import SpinLoader from './SpinLoader';
 
 
 const Service = () => {
@@ -11,6 +12,7 @@ const Service = () => {
     const navigate = useNavigate();
     const [seen, setSeen] = useState(false);
     const [oid, setOid] = useState("");
+    const [loader, setLoader] = useState(false);
 
     function togglePop(orderid) {
         setOid(orderid);
@@ -31,6 +33,7 @@ const Service = () => {
 
             const addItem = addToCart();
             try {
+                setLoader(true);
                 const result = await fetch(`${import.meta.env.VITE_BASE_URL}/cart`, {
                     method: 'POST',
                     headers: {
@@ -39,6 +42,7 @@ const Service = () => {
                     body: JSON.stringify({ token, ingredients: addItem, price: total }),
                 })
                 const res = await result.json();
+                setLoader(false);
                 if (result.ok) {
                     toast.success(res.msg);
                 } else {
@@ -148,6 +152,7 @@ const Service = () => {
                 {seen ? <OrderDetails toggle={togglePop} id={oid} /> : null}
 
             </> : <h1 className='text-center font-heading' style={{ marginTop: "100px" }}>Please Login before using Our Services</h1>}
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }

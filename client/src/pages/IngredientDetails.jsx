@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from "react-toastify";
+import SpinLoader from './SpinLoader';
 
 const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
     const [seen, setSeen] = useState(false);
@@ -11,8 +12,10 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
     const togglePop = () => {
         setSeen(!seen);
     };
+    const [loader, setLoader] = useState(false);
 
     const askToSave = async () => {
+        setLoader(true);
         if (window.confirm("Do You want to save the Stocks and Prices")) {
             try {
                 const result = await fetch(`${import.meta.env.VITE_BASE_URL}/ingredient`, {
@@ -23,6 +26,7 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
                     body: JSON.stringify({ _id: toDisplay._id, price: newData.price, stock: newData.stock }),
                 })
                 const res = await result.json();
+                setLoader(false);
                 if (result.ok) {
                     toast.success(res.msg);
                     fetchIngred();
@@ -31,6 +35,7 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
                     toast.error(res.msg);
                 }
             } catch (error) {
+                setLoader(false);
                 console.log(error);
             }
         }
@@ -105,6 +110,7 @@ const IngredientDetails = ({ toggle, toDisplay, fetchIngred }) => {
                     </div>
                 </div>
             </div>
+            {loader ? <SpinLoader /> : <></>}
         </>
     )
 }
