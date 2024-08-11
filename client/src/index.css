@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #FFF2D7;
+    /* background-color: #FFF2D7; */
     min-height: 100vh;
     position: relative;
 }
@@ -22,7 +22,7 @@ body::after {
     font-family: "Fjalla One", sans-serif;
     font-weight: 400;
     font-style: normal;
-    color: #F98866;
+    color: purple;
 }
 
 footer {

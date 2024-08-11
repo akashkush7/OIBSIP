@@ -12,7 +12,7 @@ const About = () => {
                             <div className="row">
                                 <div className="col-md-6 pt-1 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center flex-column">
                                     <h2 className="m-5 font-heading">
-                                        Pizza Delivery Service is a Web application project made by <span style={{ color: "purple", whiteSpace: "nowrap" }}>Akash Kushwaha</span> under the Web Development Internship provided by <span style={{ color: "purple" }}>Oasis Infobyte</span>.
+                                        Pizza Delivery Service is a Web application project made by <span style={{ color: "red", whiteSpace: "nowrap" }}>Akash Kushwaha</span>
                                     </h2>
                                 </div>
                                 <div className="col-lg-6 mt-md-5 mt-lg-5 order-1 order-lg-2 header-img d-flex justify-content-center" style={{ maxWidth: "800px" }}>

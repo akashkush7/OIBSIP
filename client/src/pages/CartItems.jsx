@@ -32,7 +32,7 @@ const CartItems = ({ item }) => {
     }
 
     return (
-        <div className="card my-4 fade-in-div" style={{ color: "white", backgroundColor: "#F98866" }}>
+        <div className="card my-4 fade-in-div" style={{ color: "white", backgroundColor: "purple" }}>
             <img src={Img["Slide1"]} className="card-img-top" alt="Cart-Item" style={{ objectFit: "cover", height: "300px" }} />
             <div className="card-body">
                 <h4 className="card-title">Custom Pizza</h4>
