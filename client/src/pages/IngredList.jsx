@@ -7,7 +7,7 @@ const IngredList = ({ name, description, price, items, optional }) => {
 
     return (
         <>
-            <div className="card m-4 text-white fade-in-div" style={{ width: "400px", backgroundColor: "#F98866" }}>
+            <div className="card m-4 text-white fade-in-div" style={{ width: "400px", backgroundColor: "purple" }}>
                 <img src={Img[name.replace(" ", "")]} className="card-img-top img-fluid" alt={name} style={{ objectFit: "cover", height: "300px" }} />
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
