@@ -16,7 +16,7 @@ const About = () => {
                                     </h2>
                                 </div>
                                 <div className="col-lg-6 mt-md-5 mt-lg-5 order-1 order-lg-2 header-img d-flex justify-content-center" style={{ maxWidth: "800px" }}>
-                                    <img className="img-fluid" src={Img["PizzaMain"]} alt="" style={{ width: "80%", height: "100%" }} />
+                                    <img loading = "lazy" className="img-fluid" src={Img["PizzaMain"]} alt="" style={{ width: "80%", height: "100%" }} />
                                 </div>
                             </div>
                         </div>

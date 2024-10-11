@@ -63,7 +63,7 @@ const Home = () => {
                     foo.map((curr, index) => {
                         return (
                             <div className="fade-in-div" style={{ width: "400px" }} key={index}>
-                                <img src={Img[`Pizza${index + 1}`]} alt="Pizza" style={{ width: "100%" }} />
+                                <img loading = "lazy" src={Img[`Pizza${index + 1}`]} alt="Pizza" style={{ width: "100%" }} />
                             </div>
                         );
                     })
