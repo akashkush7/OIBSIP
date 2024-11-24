@@ -54,7 +54,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
     return (
         <>
             <div className='popup fade-in-div'>
-                <div className='popup-inner'>
+                <div className='popup-inner-item'>
                     <h2 className='text-center fw-bold font-heading'>Order Details</h2>
                     <table className='table text-center'>
                         <tbody>
@@ -95,7 +95,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                             </tr>
                             <tr>
                                 <th>Date and Time</th>
-                                <td>{`${new Date(data.date).toLocaleDateString('hi-IN')} ${new Date(data.date).toLocaleTimeString('hi-IN')}`}</td>
+                                <td>{`${data.date}`}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -117,7 +117,7 @@ const OrderDetailsAdmin = ({ toggle, data, fetchOrders }) => {
                                                 return (
                                                     <tr key={index}>
                                                         <th scope="row">{curr[0]}</th>
-                                                        <td>{curr[1].toString()}</td>
+                                                        {Array.isArray(curr[1]) ? <td>{curr[1].toString().replaceAll(',', ', ')}</td> : <td>{curr[1]}</td>}
                                                     </tr>
                                                 )
                                             })}

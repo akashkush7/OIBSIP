@@ -302,7 +302,7 @@ const refund = async (req, res) => {
 const makeOrder = async (req, res) => {
     try {
         const { order, email, price, address, orderId, paymentStatus, name, phone, date } = req.body;
-        const resultUser = await User.updateOne({ email }, { $push: { orders: { orderId, paymentStatus } } });
+        const resultUser = await User.updateOne({ email }, { $push: { orders: { orderId, paymentStatus, date } } });
         const resultAdmin = await Admin.create({ order, name, phone, price, address, orderId, paymentStatus, date });
         if (order[0]['_id']) {
             await User.updateOne({ email }, { $set: { cart: [] } })

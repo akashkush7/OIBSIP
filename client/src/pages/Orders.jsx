@@ -53,7 +53,7 @@ const Orders = () => {
                                 </tr>
                                 <tr>
                                     <th>Date</th>
-                                    <td>{`${new Date(curr.date).toLocaleDateString('hi-IN')} ${new Date(curr.date).toLocaleTimeString('hi-IN')}`}</td>
+                                    <td>{`${curr.date}`}</td>
                                 </tr>
                                 <tr>
                                     <th>Order Status</th>
