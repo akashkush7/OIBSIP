@@ -107,7 +107,6 @@ const userinfo = async (req, res) => {
     try {
         const { token } = req.body;
         const result = await jwt.verify(token, process.env.JWT_SECRET_KEY);
-        console.log(result);
         if (result) {
             const { userId } = result;
             const userdata = await User.findOne({ _id: userId }).select({ password: 0, cart: 0, orders: 0 });
@@ -193,10 +192,8 @@ const addToCart = async (req, res) => {
         const result = await jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (result) {
             const { userId } = result;
-            console.log(ingredients, price);
             const response = await User.updateOne({ _id: userId }, { $push: { cart: { ingredients, price } } });
             if (response) {
-                console.log(response);
                 res.status(200).json({ msg: "Added to Cart" });
             } else {
                 res.status(500).json({ msg: "Item not added to the Cart" });

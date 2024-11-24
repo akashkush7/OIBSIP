@@ -30,7 +30,7 @@ const RenderRazorpay = ({
     const paymentMethod = useRef(null);
     const { orderList, userData, total, address, setDisplayRazorpay, setOrderList } = useAuth();
     const navigate = useNavigate();
-    const date = new Date().toLocaleString('en_IN');
+    const date = new Date().toLocaleString('hi-IN');
 
     // To load razorpay checkout modal script.
     const displayRazorpay = async (options) => {

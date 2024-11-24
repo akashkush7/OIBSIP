@@ -152,7 +152,6 @@ const otpSchema = Schema({
 
 userSchema.pre('save', async function (next) {
     const user = this;
-    console.log(user);
     if (!user.isModified('password')) {
         next();
     }

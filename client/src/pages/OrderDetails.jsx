@@ -69,7 +69,7 @@ const OrderDetails = ({ toggle, id }) => {
                                 </tr>
                                 <tr>
                                     <th>Date and Time</th>
-                                    <td>{`${new Date(data.date).toLocaleDateString('hi-IN')} ${new Date(data.date).toLocaleTimeString('hi-IN')}`}</td>
+                                    <td>{`${data.date}`}</td>
                                 </tr>
                             </tbody>
                         </table>

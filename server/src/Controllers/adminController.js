@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 
 const orderDetails = async (req, res) => {
     const { id } = req.body;
-    console.log(id);
     try {
         const result = await Admin.findOne({ orderId: id }).select({ _id: 0 });
         if (result) {
