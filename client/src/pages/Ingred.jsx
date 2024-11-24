@@ -18,7 +18,7 @@ const Ingred = () => {
 
     return (
         <>
-            <h1 className='font-heading text-center mt-5'>Orders</h1>
+            <h1 className='font-heading text-center mt-5'>Ingredients</h1>
             <div className='d-flex justify-content-center mt-5 mb-5 flex-wrap col-lg-4 m-3'>
                 {ingred.map((curr, index) => {
                     return (

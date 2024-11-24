@@ -30,6 +30,7 @@ const RenderRazorpay = ({
     const paymentMethod = useRef(null);
     const { orderList, userData, total, address, setDisplayRazorpay, setOrderList } = useAuth();
     const navigate = useNavigate();
+    const date = new Date().toLocaleString('en_IN');
 
     // To load razorpay checkout modal script.
     const displayRazorpay = async (options) => {
@@ -73,7 +74,7 @@ const RenderRazorpay = ({
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ order: orderList, name: userData["name"], phone: userData["phone"], email: userData["email"], price: total, address, paymentStatus: status, orderId: orderDetails["orderId"] })
+                body: JSON.stringify({ order: orderList, name: userData["name"], phone: userData["phone"], email: userData["email"], price: total, address, paymentStatus: status, orderId: orderDetails["orderId"], date: date })
             });
             const resData = await resOrder.json();
             if (resOrder.ok) {

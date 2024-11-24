@@ -132,7 +132,7 @@ const Service = () => {
                                                 </tr>
                                                 <tr>
                                                     <th scope="col">Order Date</th>
-                                                    <td>{`${new Date(curr.date).toLocaleDateString()} ${new Date(curr.date).toLocaleTimeString()}`}</td>
+                                                    <td>{`${new Date(curr.date).toLocaleDateString('hi-IN')} ${new Date(curr.date).toLocaleTimeString('hi-IN')}`}</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col">Payment Status</th>
