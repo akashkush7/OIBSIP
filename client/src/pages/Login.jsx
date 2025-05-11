@@ -8,8 +8,8 @@ import SpinLoader from './SpinLoader';
 
 const Login = () => {
     const [data, setData] = useState({
-        email: "",
-        password: "",
+        email: "admin@gmail.com",
+        password: "Akash123",
     });
 
     const [loader, setLoader] = useState(false);
